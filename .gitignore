@@ -1,0 +1,10 @@
+assets/*
+
+protected/runtime/*
+
+database.php
+
+*.zip
+
+*.sql
+*.csv
