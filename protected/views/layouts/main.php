@@ -18,7 +18,7 @@
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
-<body>
+<body style="background-color: darkslategrey">
 
 <div class="container" id="page">
 
