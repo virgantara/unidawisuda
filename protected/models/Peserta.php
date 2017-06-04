@@ -53,15 +53,17 @@ class Peserta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nim, nama_lengkap, fakultas, prodi, tempat_lahir, tanggal_lahir, jenis_kelamin, status_warga, warga_negara, alamat, no_telp, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu, pas_photo, ijazah, akta_kelahiran, kwitansi_jilid, surat_bebas_pinjaman, resume_skripsi, surat_bebas_tunggakan, transkrip, skl_tahfidz, kwitansi_wisuda, skripsi, abstrak', 'required'),
+			array('nim, nama_lengkap, fakultas, prodi, tempat_lahir, tanggal_lahir, jenis_kelamin, status_warga, warga_negara, alamat, no_telp, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu, pas_photo, ijazah, akta_kelahiran, kwitansi_jilid, surat_bebas_pinjaman, resume_skripsi, surat_bebas_tunggakan, transkrip, skl_tahfidz, kwitansi_wisuda, skripsi, abstrak,kampus', 'required'),
 			array('nim', 'length', 'max'=>50),
-			array('nama_lengkap, pas_photo, ijazah, akta_kelahiran, kwitansi_jilid, surat_bebas_pinjaman, resume_skripsi, surat_bebas_tunggakan, transkrip, skl_tahfidz, kwitansi_wisuda, tanda_keluar_asrama, surat_jalan, skripsi, abstrak', 'length', 'max'=>255),
+			array('nama_lengkap', 'length', 'max'=>255),
 			array('fakultas, prodi, tempat_lahir, tanggal_lahir, jenis_kelamin, status_warga, warga_negara, no_telp, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu', 'length', 'max'=>100),
-			array('pas_photo, ijazah, akta_kelahiran, kwitansi_jilid, surat_bebas_pinjaman, resume_skripsi, surat_bebas_tunggakan, transkrip, skl_tahfidz, kwitansi_wisuda, tanda_keluar_asrama, surat_jalan, skripsi, abstrak', 'file', 'types' => 'jpg, gif, png, pdf, doc, docx', 'allowEmpty' => true, 'maxSize' => 1024 * 1024 * 10, 'tooLarge' => 'The file was larger than 10MB. Please upload a smaller file.'),
-            
+			array('ijazah, akta_kelahiran, kwitansi_jilid, resume_skripsi, surat_bebas_tunggakan, transkrip, skl_tahfidz, kwitansi_wisuda, tanda_keluar_asrama, surat_jalan, skripsi, abstrak', 'file', 'types' => 'jpg, gif, png, pdf, doc, docx', 'allowEmpty' => true, 'maxSize' => 1024 * 1024 * 10, 'tooLarge' => 'The file was larger than 10MB. Please upload a smaller file.'),
+			array('pas_photo', 'file', 'types' => 'png, jpg', 'allowEmpty' => true, 'maxSize' => 1024 * 1024, 'tooLarge' => 'The file was larger than 1MB. Please upload a smaller file.'),
+            array('resume_skripsi, abstrak', 'file', 'types' => 'doc', 'allowEmpty' => true, 'maxSize' => 1024 * 1024 * 5, 'tooLarge' => 'The file was larger than 5MB. Please upload a smaller file.'),
+            array('skripsi,surat_bebas_pinjaman', 'file', 'types' => 'pdf', 'allowEmpty' => true, 'maxSize' => 1024 * 1024 * 5, 'tooLarge' => 'The file was larger than 5MB. Please upload a smaller file.'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nim, nama_lengkap, fakultas, prodi, tempat_lahir, tanggal_lahir, jenis_kelamin, status_warga, warga_negara, alamat, no_telp, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu, pas_photo, ijazah, akta_kelahiran, kwitansi_jilid, surat_bebas_pinjaman, resume_skripsi, surat_bebas_tunggakan, transkrip, skl_tahfidz, kwitansi_wisuda, tanda_keluar_asrama, surat_jalan, skripsi, abstrak, kode_pendaftaran', 'safe', 'on'=>'search'),
+			array('id, nim, nama_lengkap, fakultas, prodi, tempat_lahir, tanggal_lahir, jenis_kelamin, status_warga, warga_negara, alamat, no_telp, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu, pas_photo, ijazah, akta_kelahiran, kwitansi_jilid, surat_bebas_pinjaman, resume_skripsi, surat_bebas_tunggakan, transkrip, skl_tahfidz, kwitansi_wisuda, tanda_keluar_asrama, surat_jalan, skripsi, abstrak,status_validasi, kode_pendaftaran, kampus', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -83,7 +85,7 @@ class Peserta extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'nim' => 'Nim',
+			'nim' => 'NIM',
 			'nama_lengkap' => 'Nama Lengkap',
 			'fakultas' => 'Fakultas',
 			'prodi' => 'Prodi',
@@ -98,11 +100,11 @@ class Peserta extends CActiveRecord
 			'pekerjaan_ayah' => 'Pekerjaan Ayah',
 			'nama_ibu' => 'Nama Ibu',
 			'pekerjaan_ibu' => 'Pekerjaan Ibu',
-			'pas_photo' => 'Pas Photo',
-			'ijazah' => 'Ijazah',
+			'pas_photo' => 'Pas Foto 3x4',
+			'ijazah' => 'Ijazah Terakhir',
 			'akta_kelahiran' => 'Akta Kelahiran',
 			'kwitansi_jilid' => 'Kwitansi Jilid',
-			'surat_bebas_pinjaman' => 'Surat Bebas Pinjaman',
+			'surat_bebas_pinjaman' => 'Surat Bebas Pinjaman Buku Perpustakaan',
 			'resume_skripsi' => 'Resume Skripsi',
 			'surat_bebas_tunggakan' => 'Surat Bebas Tunggakan',
 			'transkrip' => 'Transkrip',
@@ -112,6 +114,7 @@ class Peserta extends CActiveRecord
 			'surat_jalan' => 'Surat Jalan',
 			'skripsi' => 'Skripsi',
 			'abstrak' => 'Abstrak',
+			'kampus' => 'Kampus',
 		);
 	}
 

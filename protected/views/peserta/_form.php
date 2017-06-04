@@ -2,6 +2,16 @@
 /* @var $this PesertaController */
 /* @var $model Peserta */
 /* @var $form CActiveForm */
+
+$listkampus = array(
+		'Siman' => 'Siman',
+		'Gontor' => 'Gontor',
+		'Mantingan' => 'Mantingan',
+		'Kediri' => 'Kediri',
+		'Kandangan' => 'Kandangan',
+		'Magelang' => 'Magelang'
+	);
+
 ?>
 <script src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.min.js" type="text/javascript"></script>
 <script src="<?php echo Yii::app()->baseUrl; ?>/js/dobPicker.id.min.js" type="text/javascript"></script>
@@ -32,7 +42,11 @@
 	    		url : '<?php echo Yii::app()->createUrl('peserta/getProdi');?>',
 	    		type : 'POST',
 	    		data : 'nama='+$(this).val(),
+	    		beforeSend : function(){
+	    			$('#loading').show();
+	    		},
 	    		success : function(data){
+	    			$('#loading').hide();
 	    			var hasil = JSON.parse(data);
 	    			$('#Peserta_prodi').empty();
 	    			var row = '';
@@ -86,6 +100,11 @@
 	</div>
 	<table>
 		<tr>
+			<td>	<?php echo $form->labelEx($model,'kampus'); ?>
+		<?php echo $form->dropDownList($model,'kampus',$listkampus,array('empty'=>'- Pilih Kampus -')); ?>
+		<?php echo $form->error($model,'kampus'); ?></td>
+		</tr>
+		<tr>
 			<td>	<?php echo $form->labelEx($model,'nim'); ?>
 		<?php echo $form->textField($model,'nim',array('size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'nim'); ?></td>
@@ -99,16 +118,20 @@
 		<?php 
 		
 		$list = CHtml::listData(Fakultas::model()->findAll(),'nama_fakultas','nama_fakultas');
-		echo $form->dropDownList($model,'fakultas',$list); 
+		echo $form->dropDownList($model,'fakultas',$list,array(
+        'empty'=>'--Pilih Fakultas--')); 
 		?>
 		<?php echo $form->error($model,'fakultas'); ?>
 		</td>
 			<td>
 			<?php echo $form->labelEx($model,'prodi'); ?>
+
 		<?php 
 		$list = array();
 		echo $form->dropDownList($model,'prodi',$list); 
+
 		?>
+		<img id="loading" style="display: none" src="<?php echo Yii::app()->baseUrl;?>/images/loading.gif"/>
 		<?php echo $form->error($model,'prodi'); ?>
 		</td>
 		</tr>
@@ -228,14 +251,17 @@
 	</tr>
 		
 	<tr>
-		<td><?php echo $form->labelEx($model,'surat_bebas_pinjaman'); ?></td>
+		<td><?php echo $form->labelEx($model,'surat_bebas_pinjaman'); ?>
+			<small>(filetype: pdf)</small>
+		</td>
 		<td><?php
 		 echo $form->fileField($model,'surat_bebas_pinjaman');
 		 echo $form->error($model,'surat_bebas_pinjaman'); ?>
 		</td>
 	</tr>
 	<tr>
-		<td><?php echo $form->labelEx($model,'resume_skripsi'); ?></td>
+		<td><?php echo $form->labelEx($model,'resume_skripsi'); ?>
+		<small>(filetype: doc)</small></td>
 		<td><?php
 		 echo $form->fileField($model,'resume_skripsi');
 		 echo $form->error($model,'resume_skripsi'); ?>
@@ -288,14 +314,19 @@
 		</td>
 	</tr>
 	<tr>
-		<td><?php echo $form->labelEx($model,'skripsi'); ?></td>
+		<td><?php echo $form->labelEx($model,'skripsi'); ?>
+			<small>(filetype: pdf)</small>
+
+		</td>
 		<td><?php
 		 echo $form->fileField($model,'skripsi');
 		 echo $form->error($model,'skripsi'); ?>
 		</td>
 	</tr>	
 	<tr>
-		<td><?php echo $form->labelEx($model,'abstrak'); ?></td>
+		<td><?php echo $form->labelEx($model,'abstrak'); ?>
+			<small>(filetype: doc)</small>
+		</td>
 		<td><?php
 		 echo $form->fileField($model,'abstrak');
 		 echo $form->error($model,'abstrak'); ?>

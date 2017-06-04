@@ -311,10 +311,8 @@ class PesertaController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Peserta');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+		$this->layout = "//layouts/column1";
+		$this->render('index');
 	}
 
 	/**
