@@ -7,6 +7,8 @@
  */
 class UserIdentity extends CUserIdentity
 {
+
+	const ERROR_USER_INACTIVE = 3;
 	/**
 	 * Authenticates a user.
 	 * The example implementation makes sure if the username and password
@@ -17,17 +19,37 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function authenticate()
 	{
-		$users=array(
-			// username => password
-			'demo'=>'demo',
-			'admin'=>'admin',
-		);
-		if(!isset($users[$this->username]))
+		$user = User::model()->findByPk($this->username);
+		
+		if(is_null($user))
+		{
+
 			$this->errorCode=self::ERROR_USERNAME_INVALID;
-		elseif($users[$this->username]!==$this->password)
+
+		}
+		else if($user->PASSWORD!==$this->password)
+		{
+			
 			$this->errorCode=self::ERROR_PASSWORD_INVALID;
-		else
+
+		}
+		else if($user->STATUS != 1){
+
+			$this->errorCode=self::ERROR_USER_INACTIVE;
+			
+		}
+		else{
+
 			$this->errorCode=self::ERROR_NONE;
+			$this->setState('isLogin',true);
+			$this->setState('USERNAME', $user->USERNAME);
+			$this->setState('LEVEL', $user->LEVEL);
+		
+		
+		
+		}
+
+
 		return !$this->errorCode;
 	}
 }
