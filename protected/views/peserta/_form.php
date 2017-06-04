@@ -198,93 +198,110 @@
 
 
 	<table>
-		<tr>
-			<td>
-				<?php echo $form->labelEx($model,'pas_photo'); ?>
-		<?php
+	<tr>
+		<td><?php echo $form->labelEx($model,'pas_photo'); ?></td>
+		<td><?php
 		 echo $form->fileField($model,'pas_photo');
-		 ?>
-		<?php echo $form->error($model,'pas_photo'); ?>
-			</td>
-			<td>
-				<?php echo $form->labelEx($model,'ijazah'); ?>
-		<?php echo $form->fileField($model,'ijazah',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'ijazah'); ?>
-			</td>
-			<td>
-				<?php echo $form->labelEx($model,'akta_kelahiran'); ?>
-		<?php echo $form->fileField($model,'akta_kelahiran',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'akta_kelahiran'); ?>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<?php echo $form->labelEx($model,'kwitansi_jilid'); ?>
-		<?php echo $form->fileField($model,'kwitansi_jilid',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'kwitansi_jilid'); ?>
-			</td>
-			<td>
-				<?php echo $form->labelEx($model,'surat_bebas_pinjaman'); ?>
-		<?php echo $form->fileField($model,'surat_bebas_pinjaman',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'surat_bebas_pinjaman'); ?>
-			</td>
-			<td>
-				<?php echo $form->labelEx($model,'resume_skripsi'); ?>
-		<?php echo $form->fileField($model,'resume_skripsi',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'resume_skripsi'); ?>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<?php echo $form->labelEx($model,'surat_bebas_tunggakan'); ?>
-		<?php echo $form->fileField($model,'surat_bebas_tunggakan',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'surat_bebas_tunggakan'); ?>
-			</td>
-			<td>
-			<?php echo $form->labelEx($model,'transkrip'); ?>
-		<?php echo $form->fileField($model,'transkrip',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'transkrip'); ?>
-			</td>
-			<td>
-				<?php echo $form->labelEx($model,'skl_tahfidz'); ?>
-		<?php echo $form->fileField($model,'skl_tahfidz',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'skl_tahfidz'); ?>
-			</td>
-		</tr>
-		<tr>
-			<td>
-		<?php echo $form->labelEx($model,'kwitansi_wisuda'); ?>
-		<?php echo $form->fileField($model,'kwitansi_wisuda',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'kwitansi_wisuda'); ?>
-			</td>
-			<td>
-			<?php echo $form->labelEx($model,'tanda_keluar_asrama'); ?><small>Khusus Mahasiswa Siman</small>
-		<?php echo $form->fileField($model,'tanda_keluar_asrama',array('size'=>60,'maxlength'=>255)); ?>
+		 echo $form->error($model,'pas_photo'); ?>
+		</td>
+	</tr>
+	<tr>
+		<td><?php echo $form->labelEx($model,'ijazah'); ?></td>
+		<td><?php
+		 echo $form->fileField($model,'ijazah');
+		 echo $form->error($model,'ijazah'); ?>
+		</td>
+	</tr>
+	<tr>
+		<td><?php echo $form->labelEx($model,'akta_kelahiran'); ?></td>
+		<td><?php
+		 echo $form->fileField($model,'akta_kelahiran');
+		 echo $form->error($model,'akta_kelahiran'); ?>
+		</td>
+	</tr>
+	<tr>
+		<td><?php echo $form->labelEx($model,'kwitansi_jilid'); ?></td>
+		<td><?php
+		 echo $form->fileField($model,'kwitansi_jilid');
+		 echo $form->error($model,'kwitansi_jilid'); ?>
+		</td>
+	</tr>
 		
-		<?php echo $form->error($model,'tanda_keluar_asrama'); ?>
-			</td>
-			<td>
-			<?php echo $form->labelEx($model,'surat_jalan'); ?>	<small>Khusus Mahasiswa Siman</small>
-		<?php echo $form->fileField($model,'surat_jalan',array('size'=>60,'maxlength'=>255)); ?>
-
-		<?php echo $form->error($model,'surat_jalan'); ?>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<?php echo $form->labelEx($model,'skripsi'); ?>
-		<?php echo $form->fileField($model,'skripsi',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'skripsi'); ?>
-			</td>
-			<td>
-		<?php echo $form->labelEx($model,'abstrak'); ?>
-		<?php echo $form->fileField($model,'abstrak',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'abstrak'); ?>
-			</td>
-			<td>
-			&nbsp;
-			</td>
-		</tr>
+	<tr>
+		<td><?php echo $form->labelEx($model,'surat_bebas_pinjaman'); ?></td>
+		<td><?php
+		 echo $form->fileField($model,'surat_bebas_pinjaman');
+		 echo $form->error($model,'surat_bebas_pinjaman'); ?>
+		</td>
+	</tr>
+	<tr>
+		<td><?php echo $form->labelEx($model,'resume_skripsi'); ?></td>
+		<td><?php
+		 echo $form->fileField($model,'resume_skripsi');
+		 echo $form->error($model,'resume_skripsi'); ?>
+		</td>
+	</tr>
+	<tr>
+		<td><?php echo $form->labelEx($model,'surat_bebas_tunggakan'); ?></td>
+		<td><?php
+		 echo $form->fileField($model,'surat_bebas_tunggakan');
+		 echo $form->error($model,'surat_bebas_tunggakan'); ?>
+		</td>
+	</tr>
+	<tr>
+		<td><?php echo $form->labelEx($model,'transkrip'); ?></td>
+		<td><?php
+		 echo $form->fileField($model,'transkrip');
+		 echo $form->error($model,'transkrip'); ?>
+		</td>
+	</tr>
+	<tr>
+		<td><?php echo $form->labelEx($model,'skl_tahfidz'); ?></td>
+		<td><?php
+		 echo $form->fileField($model,'skl_tahfidz');
+		 echo $form->error($model,'skl_tahfidz'); ?>
+		</td>
+	</tr>
+	<tr>
+		<td><?php echo $form->labelEx($model,'kwitansi_wisuda'); ?></td>
+		<td><?php
+		 echo $form->fileField($model,'kwitansi_wisuda');
+		 echo $form->error($model,'kwitansi_wisuda'); ?>
+		</td>
+	</tr>
+	<tr>
+		<td><?php echo $form->labelEx($model,'tanda_keluar_asrama'); ?>
+			<small>Khusus Mahasiswa Siman</small>
+		</td>
+		<td><?php
+		 echo $form->fileField($model,'tanda_keluar_asrama');
+		 echo $form->error($model,'tanda_keluar_asrama'); ?>
+		</td>
+	</tr>
+	<tr>
+		<td><?php echo $form->labelEx($model,'surat_jalan'); ?>
+			<small>Khusus Mahasiswa Siman</small>
+		</td>
+		<td><?php
+		 echo $form->fileField($model,'surat_jalan');
+		 echo $form->error($model,'surat_jalan'); ?>
+		</td>
+	</tr>
+	<tr>
+		<td><?php echo $form->labelEx($model,'skripsi'); ?></td>
+		<td><?php
+		 echo $form->fileField($model,'skripsi');
+		 echo $form->error($model,'skripsi'); ?>
+		</td>
+	</tr>	
+	<tr>
+		<td><?php echo $form->labelEx($model,'abstrak'); ?></td>
+		<td><?php
+		 echo $form->fileField($model,'abstrak');
+		 echo $form->error($model,'abstrak'); ?>
+		</td>
+	</tr>	
+	
 	</table>
 
 
