@@ -52,6 +52,15 @@
 
 <div class="form">
 
+<?php if(Yii::app()->user->hasFlash('success')){ ?>
+
+<div class="flash-success">
+	<?php echo Yii::app()->user->getFlash('success'); ?>
+</div>
+
+<?php 
+}
+ ?>
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'peserta-form',
 	// Please note: When you enable ajax validation, make sure the corresponding
@@ -257,7 +266,7 @@
 			<td>
 			<?php echo $form->labelEx($model,'surat_jalan'); ?>	<small>Khusus Mahasiswa Siman</small>
 		<?php echo $form->fileField($model,'surat_jalan',array('size'=>60,'maxlength'=>255)); ?>
-	
+
 		<?php echo $form->error($model,'surat_jalan'); ?>
 			</td>
 		</tr>
