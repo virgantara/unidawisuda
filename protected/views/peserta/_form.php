@@ -13,6 +13,11 @@ $listkampus = array(
 	);
 
 ?>
+<style type="text/css">
+	input[type=button], input[type=submit]{
+		padding:5px 10px;
+	}
+</style>
 <script src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.min.js" type="text/javascript"></script>
 <script src="<?php echo Yii::app()->baseUrl; ?>/js/dobPicker.id.min.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -26,6 +31,20 @@ $listkampus = array(
 	      yearDefault: 'Year', /* Optional */
 	      minimumAge: 12, /* Optional */
 	      maximumAge: 80 /* Optional */
+	    });
+
+	    $('#btnsimpan').click(function(e){
+	    	e.preventDefault();
+
+	    	$('#dialog').dialog("open");
+	    });
+
+	    $('#simpan').click(function(e){
+	    	$('#peserta-form').submit();
+	    });
+
+	    $('#batal').click(function(e){
+	    	$('#dialog').dialog("close");
 	    });
 
 	    $('#dobyear').change(function(){
@@ -337,9 +356,27 @@ $listkampus = array(
 
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('SIMPAN'); ?>
+		<?php echo CHtml::submitButton('SIMPAN',array('id' => 'btnsimpan')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
+<?php 
+$this->beginWidget('zii.widgets.jui.CJuiDialog',array(
+    'id'=>'dialog',
+    // additional javascript options for the dialog plugin
+    'options'=>array(
+        'title'=>'Konfirmasi',
+        'autoOpen'=>false,
+    ),
+));
+
+?>
+<p>Apakah data Anda sudah benar?</p>
+<input type="button" id="simpan" value="Ok"/>
+<input type="button" id="batal" value="Batal"/>
+<?php
+$this->endWidget('zii.widgets.jui.CJuiDialog');
+?>
