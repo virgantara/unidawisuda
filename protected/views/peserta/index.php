@@ -4,6 +4,7 @@ ol {
     list-style-type: lower-alpha;
 
     font-size : 16px;
+    color : black;
 }
 
 li{
@@ -13,6 +14,7 @@ li{
 
 p,div{
 	font-size : 16px;
+  color : black;
 }
 
 </style>

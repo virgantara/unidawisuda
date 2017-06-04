@@ -22,13 +22,13 @@
 
 <div class="container" id="page">
 
-	<div id="header" style="background-color: #253b80;">
+	<div id="header">
 		<div id="logo">
-		<img src="<?php echo Yii::app()->baseUrl;?>/images/logo_unida.png"/>
+		<img src="<?php echo Yii::app()->baseUrl;?>/images/logo_baak.png" width="100%" />
 		
 			
 		</div>
-		<h2 style="color: white;text-align: center;">Selamat Datang Para Wisudawan / Wisudawati</h2>
+		<h2 style="background-color: #253b80;color: white;text-align: center;">Selamat Datang Para Wisudawan / Wisudawati</h2>
 	</div><!-- header -->
 
 	<div id="mainmenu">
