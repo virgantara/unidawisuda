@@ -1,5 +1,7 @@
 <?php
-Yii::app()->user->setState("nim", null);
+
+if(empty($model->nim))
+	Yii::app()->user->setState("nim", null);
 /* @var $this PesertaController */
 /* @var $model Peserta */
 /* @var $form CActiveForm */

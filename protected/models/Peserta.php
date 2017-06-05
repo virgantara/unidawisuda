@@ -58,8 +58,8 @@ class Peserta extends CActiveRecord
 			array('nim', 'numerical', 'integerOnly'=>true),
 			array('nim','unique'),
 			array('nama_lengkap', 'length', 'max'=>255),
-			array('tanda_keluar_asrama','cekKampus'),
-			array('surat_jalan','cekKampus'),
+			array('tanda_keluar_asrama','cekTanda'),
+			array('surat_jalan','cekSuratJalan'),
 			array('surat_bebas_tunggakan','cekKmi'),
 			array('fakultas, prodi, tempat_lahir, tanggal_lahir, jenis_kelamin, status_warga, warga_negara, no_telp, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu', 'length', 'max'=>100),
 			// array('ijazah, akta_kelahiran, kwitansi_jilid, resume_skripsi, surat_bebas_tunggakan, transkrip, skl_tahfidz, kwitansi_wisuda, tanda_keluar_asrama, surat_jalan, skripsi, abstrak', 'file', 'types' => 'jpg, gif, png, pdf, doc, docx', 'allowEmpty' => true, 'maxSize' => 1024 * 1024 * 10, 'tooLarge' => 'The file was larger than 10MB. Please upload a smaller file.'),
@@ -124,12 +124,24 @@ class Peserta extends CActiveRecord
 		);
 	}
 
-	public function cekKampus($attribute, $params)
+	public function cekTanda($attribute, $params)
     {
     	// print_r($params);exit;
 		$kampus = $this->kampus;
-		if($kampus == 'Siman' && empty($params))
-            $this->addError($attribute, $attribute.' cannot be blank.');
+		$tnd = $this->tanda_keluar_asrama;
+
+		if($kampus == 'Siman' && empty($tnd))
+            $this->addError($attribute, 'Tanda Keluar Asrama cannot be blank.');
+    }
+
+    public function cekSuratJalan($attribute, $params)
+    {
+    	// print_r($params);exit;
+		$kampus = $this->kampus;
+		$tnd = $this->surat_jalan;
+
+		if($kampus == 'Siman' && empty($tnd))
+            $this->addError($attribute, 'Surat Jalan cannot be blank.');
     }
 
     public function cekKmi($attribute, $params)

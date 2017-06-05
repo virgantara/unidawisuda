@@ -37,19 +37,76 @@ $this->menu=array(
 		'pekerjaan_ayah',
 		'nama_ibu',
 		'pekerjaan_ibu',
-		'pas_photo',
-		'ijazah',
-		'akta_kelahiran',
-		'kwitansi_jilid',
-		'surat_bebas_pinjaman',
-		'resume_skripsi',
-		'surat_bebas_tunggakan',
-		'transkrip',
-		'skl_tahfidz',
-		'kwitansi_wisuda',
-		'tanda_keluar_asrama',
-		'surat_jalan',
-		'skripsi',
-		'abstrak',
+		 array(
+		 	'label'=>'Foto',
+            'type'=>'raw',
+        	'value'=>CHtml::link(CHtml::encode($model->pas_photo), Yii::app()->baseUrl.'/uploads/pas_photo/'.$model->pas_photo)
+        ),
+
+		array(
+		 	'label'=>'Ijazah',
+            'type'=>'raw',
+        	'value'=>CHtml::link(CHtml::encode($model->ijazah), Yii::app()->baseUrl.'/uploads/ijazah/'.$model->ijazah)
+        ),
+        array(
+		 	'label'=>'Akta Kelahiran',
+            'type'=>'raw',
+        	'value'=>CHtml::link(CHtml::encode($model->akta_kelahiran), Yii::app()->baseUrl.'/uploads/akta_kelahiran/'.$model->akta_kelahiran)
+        ),
+		 array(
+		 	'label'=>'Kwitansi Penjilidan',
+            'type'=>'raw',
+        	'value'=>CHtml::link(CHtml::encode($model->kwitansi_jilid), Yii::app()->baseUrl.'/uploads/kwitansi_jilid/'.$model->kwitansi_jilid)
+        ),
+		 array(
+		 	'label'=>'Surat Bebas Pinjaman',
+            'type'=>'raw',
+        	'value'=>CHtml::link(CHtml::encode($model->surat_bebas_pinjaman), Yii::app()->baseUrl.'/uploads/surat_bebas_pinjaman/'.$model->surat_bebas_pinjaman)
+        ),
+		 array(
+		 	'label'=>'Resume Skripsi',
+            'type'=>'raw',
+        	'value'=>CHtml::link(CHtml::encode($model->resume_skripsi), Yii::app()->baseUrl.'/uploads/resume_skripsi/'.$model->resume_skripsi)
+        ),
+		  array(
+		 	'label'=>'Surat Bebas Tunggakan',
+            'type'=>'raw',
+        	'value'=>CHtml::link(CHtml::encode($model->surat_bebas_tunggakan), Yii::app()->baseUrl.'/uploads/surat_bebas_tunggakan/'.$model->surat_bebas_tunggakan)
+        ),
+		 array(
+		 	'label'=>'Transkrip',
+            'type'=>'raw',
+        	'value'=>CHtml::link(CHtml::encode($model->transkrip), Yii::app()->baseUrl.'/uploads/transkrip/'.$model->transkrip)
+        ),
+		 array(
+		 	'label'=>'Surat Keterangan Lulus Tahfidz',
+            'type'=>'raw',
+        	'value'=>CHtml::link(CHtml::encode($model->skl_tahfidz), Yii::app()->baseUrl.'/uploads/skl_tahfidz/'.$model->skl_tahfidz)
+        ),
+		 array(
+		 	'label'=>'Kwitansi Wisuda',
+            'type'=>'raw',
+        	'value'=>CHtml::link(CHtml::encode($model->kwitansi_wisuda), Yii::app()->baseUrl.'/uploads/kwitansi_wisuda/'.$model->kwitansi_wisuda)
+        ),
+		 array(
+		 	'label'=>'Tanda Keluar Asrama',
+            'type'=>'raw',
+        	'value'=>CHtml::link(CHtml::encode($model->tanda_keluar_asrama), Yii::app()->baseUrl.'/uploads/tanda_keluar_asrama/'.$model->tanda_keluar_asrama)
+        ),
+		 array(
+		 	'label'=>'Surat Jalan',
+            'type'=>'raw',
+        	'value'=>CHtml::link(CHtml::encode($model->surat_jalan), Yii::app()->baseUrl.'/uploads/surat_jalan/'.$model->surat_jalan)
+        ),
+		  array(
+		 	'label'=>'Skripsi',
+            'type'=>'raw',
+        	'value'=>CHtml::link(CHtml::encode($model->skripsi), Yii::app()->baseUrl.'/uploads/skripsi/'.$model->skripsi)
+        ),
+		   array(
+		 	'label'=>'Abstrak',
+            'type'=>'raw',
+        	'value'=>CHtml::link(CHtml::encode($model->abstrak), Yii::app()->baseUrl.'/uploads/abstrak/'.$model->abstrak)
+        ),
 	),
 )); ?>
