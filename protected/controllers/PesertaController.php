@@ -28,7 +28,7 @@ class PesertaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','getProdi'),
+				'actions'=>array('index','view','create','getProdi','setSessionNIM','uploadPasPhoto','uploadIjazah','uploadAkta','uploadKwitansiJilid','uploadSBP','uploadResume','uploadSBT','uploadTranskrip','uploadSKL','uploadKwitansiWisuda','uploadSuratJalan','uploadSkripsi','uploadAbstrak','export'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -44,6 +44,478 @@ class PesertaController extends Controller
 			),
 		);
 	}
+
+	public function actionExport()
+	{
+		$this->layout = '';
+		$model = Peserta::model()->findAll();
+
+		$this->renderPartial('export',array(
+			'model' => $model,
+		));
+
+		// $this->render('export',array(
+		// 	$model
+		// ));
+	}
+
+	public function actionUploadAbstrak()
+	{
+        Yii::import("ext.EAjaxUpload.qqFileUploader");
+ 		if(Yii::app()->user->hasState("nim"))
+ 		{
+			$nim = 's_'.Yii::app()->user->getState("nim");
+	        $folder=Yii::app()->basePath.'/uploads/abstrak/';// folder for uploaded files
+	        $allowedExtensions = array("doc");//array("jpg","jpeg","gif","exe","mov" and etc...
+	        $sizeLimit = 10 * 1024 * 1024;// maximum file size in bytes
+	        $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+	        $result = $uploader->handleUpload($folder,$nim,true);
+	        $return = htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+	 
+	        $fileSize=filesize($folder.$result['filename']);//GETTING FILE SIZE
+	        $fileName=$result['filename'];//GETTING FILE NAME
+	 
+	        echo $return;// it's array	 			
+ 		}
+
+ 		else{
+ 			$return = array(
+ 				'error' => 'NIM harus diisi dulu'
+ 			);
+
+ 			$return = htmlspecialchars(json_encode($return), ENT_NOQUOTES);
+	 
+
+ 			echo $return;
+ 		}
+	}
+
+	public function actionUploadSkripsi()
+	{
+        Yii::import("ext.EAjaxUpload.qqFileUploader");
+ 		if(Yii::app()->user->hasState("nim"))
+ 		{
+			$nim = 's_'.Yii::app()->user->getState("nim");
+	        $folder=Yii::app()->basePath.'/uploads/skripsi/';// folder for uploaded files
+	        $allowedExtensions = array("pdf");//array("jpg","jpeg","gif","exe","mov" and etc...
+	        $sizeLimit = 10 * 1024 * 1024;// maximum file size in bytes
+	        $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+	        $result = $uploader->handleUpload($folder,$nim,true);
+	        $return = htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+	 
+	        $fileSize=filesize($folder.$result['filename']);//GETTING FILE SIZE
+	        $fileName=$result['filename'];//GETTING FILE NAME
+	 
+	        echo $return;// it's array	 			
+ 		}
+
+ 		else{
+ 			$return = array(
+ 				'error' => 'NIM harus diisi dulu'
+ 			);
+
+ 			$return = htmlspecialchars(json_encode($return), ENT_NOQUOTES);
+	 
+
+ 			echo $return;
+ 		}
+	}
+
+	public function actionUploadSuratJalan()
+	{
+        Yii::import("ext.EAjaxUpload.qqFileUploader");
+ 		if(Yii::app()->user->hasState("nim"))
+ 		{
+			$nim = 'sj_'.Yii::app()->user->getState("nim");
+	        $folder=Yii::app()->basePath.'/uploads/surat_jalan/';// folder for uploaded files
+	        $allowedExtensions = array("jpg","png","pdf");//array("jpg","jpeg","gif","exe","mov" and etc...
+	        $sizeLimit = 2 * 1024 * 1024;// maximum file size in bytes
+	        $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+	        $result = $uploader->handleUpload($folder,$nim,true);
+	        $return = htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+	 
+	        $fileSize=filesize($folder.$result['filename']);//GETTING FILE SIZE
+	        $fileName=$result['filename'];//GETTING FILE NAME
+	 
+	        echo $return;// it's array	 			
+ 		}
+
+ 		else{
+ 			$return = array(
+ 				'error' => 'NIM harus diisi dulu'
+ 			);
+
+ 			$return = htmlspecialchars(json_encode($return), ENT_NOQUOTES);
+	 
+
+ 			echo $return;
+ 		}
+	}
+
+
+	public function actionUploadTandaKeluar()
+	{
+        Yii::import("ext.EAjaxUpload.qqFileUploader");
+ 		if(Yii::app()->user->hasState("nim"))
+ 		{
+			$nim = 'tnd_'.Yii::app()->user->getState("nim");
+	        $folder=Yii::app()->basePath.'/uploads/tanda_keluar_asrama/';// folder for uploaded files
+	        $allowedExtensions = array("jpg","png","pdf");//array("jpg","jpeg","gif","exe","mov" and etc...
+	        $sizeLimit = 2 * 1024 * 1024;// maximum file size in bytes
+	        $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+	        $result = $uploader->handleUpload($folder,$nim,true);
+	        $return = htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+	 
+	        $fileSize=filesize($folder.$result['filename']);//GETTING FILE SIZE
+	        $fileName=$result['filename'];//GETTING FILE NAME
+	 
+	        echo $return;// it's array	 			
+ 		}
+
+ 		else{
+ 			$return = array(
+ 				'error' => 'NIM harus diisi dulu'
+ 			);
+
+ 			$return = htmlspecialchars(json_encode($return), ENT_NOQUOTES);
+	 
+
+ 			echo $return;
+ 		}
+	}
+
+	public function actionUploadKwitansiWisuda()
+	{
+        Yii::import("ext.EAjaxUpload.qqFileUploader");
+ 		if(Yii::app()->user->hasState("nim"))
+ 		{
+			$nim = 'wsd_'.Yii::app()->user->getState("nim");
+	        $folder=Yii::app()->basePath.'/uploads/kwitansi_wisuda/';// folder for uploaded files
+	        $allowedExtensions = array("jpg","png","pdf");//array("jpg","jpeg","gif","exe","mov" and etc...
+	        $sizeLimit = 2 * 1024 * 1024;// maximum file size in bytes
+	        $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+	        $result = $uploader->handleUpload($folder,$nim,true);
+	        $return = htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+	 
+	        $fileSize=filesize($folder.$result['filename']);//GETTING FILE SIZE
+	        $fileName=$result['filename'];//GETTING FILE NAME
+	 
+	        echo $return;// it's array	 			
+ 		}
+
+ 		else{
+ 			$return = array(
+ 				'error' => 'NIM harus diisi dulu'
+ 			);
+
+ 			$return = htmlspecialchars(json_encode($return), ENT_NOQUOTES);
+	 
+
+ 			echo $return;
+ 		}
+	}
+
+	public function actionUploadSKL()
+	{
+	        Yii::import("ext.EAjaxUpload.qqFileUploader");
+	 		if(Yii::app()->user->hasState("nim"))
+	 		{
+				$nim = 'skl_'.Yii::app()->user->getState("nim");
+		        $folder=Yii::app()->basePath.'/uploads/skl_tahfidz/';// folder for uploaded files
+		        $allowedExtensions = array("jpg","png","pdf");//array("jpg","jpeg","gif","exe","mov" and etc...
+		        $sizeLimit = 2 * 1024 * 1024;// maximum file size in bytes
+		        $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+		        $result = $uploader->handleUpload($folder,$nim,true);
+		        $return = htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+		 
+		        $fileSize=filesize($folder.$result['filename']);//GETTING FILE SIZE
+		        $fileName=$result['filename'];//GETTING FILE NAME
+		 
+		        echo $return;// it's array	 			
+	 		}
+
+	 		else{
+	 			$return = array(
+	 				'error' => 'NIM harus diisi dulu'
+	 			);
+
+	 			$return = htmlspecialchars(json_encode($return), ENT_NOQUOTES);
+		 
+
+	 			echo $return;
+	 		}
+	}
+
+	public function actionUploadTranskrip()
+	{
+	        Yii::import("ext.EAjaxUpload.qqFileUploader");
+	 		if(Yii::app()->user->hasState("nim"))
+	 		{
+				$nim = 'sbp_'.Yii::app()->user->getState("nim");
+		        $folder=Yii::app()->basePath.'/uploads/transkrip/';// folder for uploaded files
+		        $allowedExtensions = array("jpg","png","pdf");//array("jpg","jpeg","gif","exe","mov" and etc...
+		        $sizeLimit = 2 * 1024 * 1024;// maximum file size in bytes
+		        $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+		        $result = $uploader->handleUpload($folder,$nim,true);
+		        $return = htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+		 
+		        $fileSize=filesize($folder.$result['filename']);//GETTING FILE SIZE
+		        $fileName=$result['filename'];//GETTING FILE NAME
+		 
+		        echo $return;// it's array	 			
+	 		}
+
+	 		else{
+	 			$return = array(
+	 				'error' => 'NIM harus diisi dulu'
+	 			);
+
+	 			$return = htmlspecialchars(json_encode($return), ENT_NOQUOTES);
+		 
+
+	 			echo $return;
+	 		}
+	}
+
+	public function actionUploadSBT()
+	{
+	        Yii::import("ext.EAjaxUpload.qqFileUploader");
+	 		if(Yii::app()->user->hasState("nim"))
+	 		{
+				$nim = 'sbp_'.Yii::app()->user->getState("nim");
+		        $folder=Yii::app()->basePath.'/uploads/surat_bebas_tunggakan/';// folder for uploaded files
+		        $allowedExtensions = array("jpg","png","pdf");//array("jpg","jpeg","gif","exe","mov" and etc...
+		        $sizeLimit = 2 * 1024 * 1024;// maximum file size in bytes
+		        $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+		        $result = $uploader->handleUpload($folder,$nim,true);
+		        $return = htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+		 
+		        $fileSize=filesize($folder.$result['filename']);//GETTING FILE SIZE
+		        $fileName=$result['filename'];//GETTING FILE NAME
+		 
+		        echo $return;// it's array	 			
+	 		}
+
+	 		else{
+	 			$return = array(
+	 				'error' => 'NIM harus diisi dulu'
+	 			);
+
+	 			$return = htmlspecialchars(json_encode($return), ENT_NOQUOTES);
+		 
+
+	 			echo $return;
+	 		}
+	}
+
+	public function actionUploadResume()
+	{
+	        Yii::import("ext.EAjaxUpload.qqFileUploader");
+	 		if(Yii::app()->user->hasState("nim"))
+	 		{
+				$nim = 'res_'.Yii::app()->user->getState("nim");
+		        $folder=Yii::app()->basePath.'/uploads/resume_skripsi/';// folder for uploaded files
+		        $allowedExtensions = array("doc");//array("jpg","jpeg","gif","exe","mov" and etc...
+		        $sizeLimit = 10 * 1024 * 1024;// maximum file size in bytes
+		        $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+		        $result = $uploader->handleUpload($folder,$nim,true);
+		        $return = htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+		 
+		        $fileSize=filesize($folder.$result['filename']);//GETTING FILE SIZE
+		        $fileName=$result['filename'];//GETTING FILE NAME
+		 
+		        echo $return;// it's array	 			
+	 		}
+
+	 		else{
+	 			$return = array(
+	 				'error' => 'NIM harus diisi dulu'
+	 			);
+
+	 			$return = htmlspecialchars(json_encode($return), ENT_NOQUOTES);
+		 
+
+	 			echo $return;
+	 		}
+
+
+	}
+
+	public function actionUploadSBP()
+	{
+	        Yii::import("ext.EAjaxUpload.qqFileUploader");
+	 		if(Yii::app()->user->hasState("nim"))
+	 		{
+				$nim = 'sbp_'.Yii::app()->user->getState("nim");
+		        $folder=Yii::app()->basePath.'/uploads/surat_bebas_pinjaman/';// folder for uploaded files
+		        $allowedExtensions = array("pdf");//array("jpg","jpeg","gif","exe","mov" and etc...
+		        $sizeLimit = 2 * 1024 * 1024;// maximum file size in bytes
+		        $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+		        $result = $uploader->handleUpload($folder,$nim,true);
+		        $return = htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+		 
+		        $fileSize=filesize($folder.$result['filename']);//GETTING FILE SIZE
+		        $fileName=$result['filename'];//GETTING FILE NAME
+		 
+		        echo $return;// it's array	 			
+	 		}
+
+	 		else{
+	 			$return = array(
+	 				'error' => 'NIM harus diisi dulu'
+	 			);
+
+	 			$return = htmlspecialchars(json_encode($return), ENT_NOQUOTES);
+		 
+
+	 			echo $return;
+	 		}
+
+
+	}
+
+	public function actionUploadKwitansiJilid()
+	{
+	        Yii::import("ext.EAjaxUpload.qqFileUploader");
+	 		if(Yii::app()->user->hasState("nim"))
+	 		{
+				$nim = 'kj_'.Yii::app()->user->getState("nim");
+		        $folder=Yii::app()->basePath.'/uploads/kwitansi_jilid/';// folder for uploaded files
+		        $allowedExtensions = array("jpg","png","pdf");//array("jpg","jpeg","gif","exe","mov" and etc...
+		        $sizeLimit = 2 * 1024 * 1024;// maximum file size in bytes
+		        $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+		        $result = $uploader->handleUpload($folder,$nim,true);
+		        $return = htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+		 
+		        $fileSize=filesize($folder.$result['filename']);//GETTING FILE SIZE
+		        $fileName=$result['filename'];//GETTING FILE NAME
+		 
+		        echo $return;// it's array	 			
+	 		}
+
+	 		else{
+	 			$return = array(
+	 				'error' => 'NIM harus diisi dulu'
+	 			);
+
+	 			$return = htmlspecialchars(json_encode($return), ENT_NOQUOTES);
+		 
+
+	 			echo $return;
+	 		}
+
+
+	}
+
+	public function actionUploadAkta()
+	{
+	        Yii::import("ext.EAjaxUpload.qqFileUploader");
+	 		if(Yii::app()->user->hasState("nim"))
+	 		{
+				$nim = 'akta_'.Yii::app()->user->getState("nim");
+		        $folder=Yii::app()->basePath.'/uploads/akta_kelahiran/';// folder for uploaded files
+		        $allowedExtensions = array("jpg","png","pdf");//array("jpg","jpeg","gif","exe","mov" and etc...
+		        $sizeLimit = 2 * 1024 * 1024;// maximum file size in bytes
+		        $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+		        $result = $uploader->handleUpload($folder,$nim,true);
+		        $return = htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+		 
+		        $fileSize=filesize($folder.$result['filename']);//GETTING FILE SIZE
+		        $fileName=$result['filename'];//GETTING FILE NAME
+		 
+		        echo $return;// it's array	 			
+	 		}
+
+	 		else{
+	 			$return = array(
+	 				'error' => 'NIM harus diisi dulu'
+	 			);
+
+	 			$return = htmlspecialchars(json_encode($return), ENT_NOQUOTES);
+		 
+
+	 			echo $return;
+	 		}
+
+
+	}
+	
+	public function actionUploadIjazah()
+	{
+	        Yii::import("ext.EAjaxUpload.qqFileUploader");
+	 		if(Yii::app()->user->hasState("nim"))
+	 		{
+				$nim = 'ijz_'.Yii::app()->user->getState("nim");
+		        $folder=Yii::app()->basePath.'/uploads/ijazah/';// folder for uploaded files
+		        $allowedExtensions = array("jpg","png","pdf");//array("jpg","jpeg","gif","exe","mov" and etc...
+		        $sizeLimit = 2 * 1024 * 1024;// maximum file size in bytes
+		        $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+		        $result = $uploader->handleUpload($folder,$nim,true);
+		        $return = htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+		 
+		        $fileSize=filesize($folder.$result['filename']);//GETTING FILE SIZE
+		        $fileName=$result['filename'];//GETTING FILE NAME
+		 
+		        echo $return;// it's array	 			
+	 		}
+
+	 		else{
+	 			$return = array(
+	 				'error' => 'NIM harus diisi dulu'
+	 			);
+
+	 			$return = htmlspecialchars(json_encode($return), ENT_NOQUOTES);
+		 
+
+	 			echo $return;
+	 		}
+
+
+	}
+
+	public function actionUploadPasPhoto()
+	{
+	        Yii::import("ext.EAjaxUpload.qqFileUploader");
+	 		if(Yii::app()->user->hasState("nim"))
+	 		{
+				$nim = 'foto_'.Yii::app()->user->getState("nim");
+		        $folder=Yii::app()->basePath.'/uploads/pas_photo/';// folder for uploaded files
+		        $allowedExtensions = array("jpg","png");//array("jpg","jpeg","gif","exe","mov" and etc...
+		        $sizeLimit = 2 * 1024 * 1024;// maximum file size in bytes
+		        $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+		        $result = $uploader->handleUpload($folder,$nim,true);
+		        $return = htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+		 
+		        $fileSize=filesize($folder.$result['filename']);//GETTING FILE SIZE
+		        $fileName=$result['filename'];//GETTING FILE NAME
+		 
+		        echo $return;// it's array	 			
+	 		}
+
+	 		else{
+	 			$return = array(
+	 				'error' => 'NIM harus diisi dulu'
+	 			);
+
+	 			$return = htmlspecialchars(json_encode($return), ENT_NOQUOTES);
+		 
+
+	 			echo $return;
+	 		}
+
+
+	}
+
+	public function actionSetSessionNIM()
+	{
+
+		$nim = $_POST['nim'];
+		if(!empty($nim))
+ 			Yii::app()->user->setState("nim", $nim);
+ 		else
+ 			Yii::app()->user->setState("nim", null);
+	}
+
 
 	public function actionGetProdi()
 	{
@@ -79,6 +551,8 @@ class PesertaController extends Controller
 		));
 	}
 
+	
+
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
@@ -94,172 +568,172 @@ class PesertaController extends Controller
 		{
 			$model->attributes=$_POST['Peserta'];
 
-			$model->pas_photo = CUploadedFile::getInstance($model, 'pas_photo');
-			if ($model->validate(array('pas_photo'))) {
-                $type = $model->pas_photo->getExtensionName();
-	            $filename = 'pas_photo_'.$model->nim.'.'.$type;
-	            $model->pas_photo->saveAs(Yii::app()->basePath.'/uploads/pas_photo/'.$filename);
-	            $model->pas_photo = $filename;
-            } 
+			// $model->pas_photo = CUploadedFile::getInstance($model, 'pas_photo');
+			// if ($model->validate(array('pas_photo'))) {
+   //              $type = $model->pas_photo->getExtensionName();
+	  //           $filename = 'pas_photo_'.$model->nim.'.'.$type;
+	  //           $model->pas_photo->saveAs(Yii::app()->basePath.'/uploads/pas_photo/'.$filename);
+	  //           $model->pas_photo = $filename;
+   //          } 
             
 
-            // ################## IJAZAH
-            $model->ijazah = CUploadedFile::getInstance($model, 'ijazah');
-			if ($model->validate(array('ijazah'))) {
+   //          // ################## IJAZAH
+   //          $model->ijazah = CUploadedFile::getInstance($model, 'ijazah');
+			// if ($model->validate(array('ijazah'))) {
                 
-            	$type = $model->ijazah->getExtensionName();
-	            $filename = 'ijazah_'.$model->nim.'.'.$type;
-	            $model->ijazah->saveAs(Yii::app()->basePath.'/uploads/ijazah/'.$filename);
-	            $model->ijazah = $filename;
-            } 
+   //          	$type = $model->ijazah->getExtensionName();
+	  //           $filename = 'ijazah_'.$model->nim.'.'.$type;
+	  //           $model->ijazah->saveAs(Yii::app()->basePath.'/uploads/ijazah/'.$filename);
+	  //           $model->ijazah = $filename;
+   //          } 
             
 
-            // ################## akta_kelahiran
-            $model->akta_kelahiran = CUploadedFile::getInstance($model, 'akta_kelahiran');
-			if ($model->validate(array('akta_kelahiran'))) {
-                $type = $model->akta_kelahiran->getExtensionName();
-	            $filename = 'akta_kelahiran_'.$model->nim.'.'.$type;
-	            $model->akta_kelahiran->saveAs(Yii::app()->basePath.'/uploads/akta_kelahiran/'.$filename);
-	            $model->akta_kelahiran = $filename;
-            } 
-
-            
-
-            // ################## kwitansi_jilid
-            $model->kwitansi_jilid = CUploadedFile::getInstance($model, 'kwitansi_jilid');
-			if ($model->validate(array('kwitansi_jilid'))) {
-
-                $type = $model->kwitansi_jilid->getExtensionName();
-	            $filename = 'kwitansi_jilid_'.$model->nim.'.'.$type;
-	            $model->kwitansi_jilid->saveAs(Yii::app()->basePath.'/uploads/kwitansi_jilid/'.$filename);
-	            $model->kwitansi_jilid = $filename;
-            } 
-            
-
-            // ################## surat_bebas_pinjaman
-            $model->surat_bebas_pinjaman = CUploadedFile::getInstance($model, 'surat_bebas_pinjaman');
-			if ($model->validate(array('surat_bebas_pinjaman'))) {
-
-                $type = $model->surat_bebas_pinjaman->getExtensionName();
-	            $filename = 'surat_bebas_pinjaman_'.$model->nim.'.'.$type;
-	            $model->surat_bebas_pinjaman->saveAs(Yii::app()->basePath.'/uploads/surat_bebas_pinjaman/'.$filename);
-	            $model->surat_bebas_pinjaman = $filename;
-            } 
+   //          // ################## akta_kelahiran
+   //          $model->akta_kelahiran = CUploadedFile::getInstance($model, 'akta_kelahiran');
+			// if ($model->validate(array('akta_kelahiran'))) {
+   //              $type = $model->akta_kelahiran->getExtensionName();
+	  //           $filename = 'akta_kelahiran_'.$model->nim.'.'.$type;
+	  //           $model->akta_kelahiran->saveAs(Yii::app()->basePath.'/uploads/akta_kelahiran/'.$filename);
+	  //           $model->akta_kelahiran = $filename;
+   //          } 
 
             
 
-            // ################## resume_skripsi
-            $model->resume_skripsi = CUploadedFile::getInstance($model, 'resume_skripsi');
-			if ($model->validate(array('resume_skripsi'))) {
+   //          // ################## kwitansi_jilid
+   //          $model->kwitansi_jilid = CUploadedFile::getInstance($model, 'kwitansi_jilid');
+			// if ($model->validate(array('kwitansi_jilid'))) {
 
- 				$type = $model->resume_skripsi->getExtensionName();
-	            $filename = 'resume_skripsi_'.$model->nim.'.'.$type;
-	            $model->resume_skripsi->saveAs(Yii::app()->basePath.'/uploads/resume_skripsi/'.$filename);
-	            $model->resume_skripsi = $filename;
-            }
+   //              $type = $model->kwitansi_jilid->getExtensionName();
+	  //           $filename = 'kwitansi_jilid_'.$model->nim.'.'.$type;
+	  //           $model->kwitansi_jilid->saveAs(Yii::app()->basePath.'/uploads/kwitansi_jilid/'.$filename);
+	  //           $model->kwitansi_jilid = $filename;
+   //          } 
+            
+
+   //          // ################## surat_bebas_pinjaman
+   //          $model->surat_bebas_pinjaman = CUploadedFile::getInstance($model, 'surat_bebas_pinjaman');
+			// if ($model->validate(array('surat_bebas_pinjaman'))) {
+
+   //              $type = $model->surat_bebas_pinjaman->getExtensionName();
+	  //           $filename = 'surat_bebas_pinjaman_'.$model->nim.'.'.$type;
+	  //           $model->surat_bebas_pinjaman->saveAs(Yii::app()->basePath.'/uploads/surat_bebas_pinjaman/'.$filename);
+	  //           $model->surat_bebas_pinjaman = $filename;
+   //          } 
 
             
 
-            // ################## surat_bebas_tunggakan
-            $model->surat_bebas_tunggakan = CUploadedFile::getInstance($model, 'surat_bebas_tunggakan');
-			if ($model->validate(array('surat_bebas_tunggakan'))) {
+   //          // ################## resume_skripsi
+   //          $model->resume_skripsi = CUploadedFile::getInstance($model, 'resume_skripsi');
+			// if ($model->validate(array('resume_skripsi'))) {
 
-            	 $type = $model->surat_bebas_tunggakan->getExtensionName();
-	            $filename = 'surat_bebas_tunggakan_'.$model->nim.'.'.$type;
-	            $model->surat_bebas_tunggakan->saveAs(Yii::app()->basePath.'/uploads/surat_bebas_tunggakan/'.$filename);
-	            $model->surat_bebas_tunggakan = $filename;
+ 		// 		$type = $model->resume_skripsi->getExtensionName();
+	  //           $filename = 'resume_skripsi_'.$model->nim.'.'.$type;
+	  //           $model->resume_skripsi->saveAs(Yii::app()->basePath.'/uploads/resume_skripsi/'.$filename);
+	  //           $model->resume_skripsi = $filename;
+   //          }
 
-            } 
+            
+
+   //          // ################## surat_bebas_tunggakan
+   //          $model->surat_bebas_tunggakan = CUploadedFile::getInstance($model, 'surat_bebas_tunggakan');
+			// if ($model->validate(array('surat_bebas_tunggakan'))) {
+
+   //          	 $type = $model->surat_bebas_tunggakan->getExtensionName();
+	  //           $filename = 'surat_bebas_tunggakan_'.$model->nim.'.'.$type;
+	  //           $model->surat_bebas_tunggakan->saveAs(Yii::app()->basePath.'/uploads/surat_bebas_tunggakan/'.$filename);
+	  //           $model->surat_bebas_tunggakan = $filename;
+
+   //          } 
 
 
            
-            // ################## transkrip
-            $model->transkrip = CUploadedFile::getInstance($model, 'transkrip');
-			if ($model->validate(array('transkrip'))) {
+   //          // ################## transkrip
+   //          $model->transkrip = CUploadedFile::getInstance($model, 'transkrip');
+			// if ($model->validate(array('transkrip'))) {
 
-                 $type = $model->transkrip->getExtensionName();
-	            $filename = 'transkrip_'.$model->nim.'.'.$type;
-	            $model->transkrip->saveAs(Yii::app()->basePath.'/uploads/transkrip/'.$filename);
-	            $model->transkrip = $filename;
-            } 
+   //               $type = $model->transkrip->getExtensionName();
+	  //           $filename = 'transkrip_'.$model->nim.'.'.$type;
+	  //           $model->transkrip->saveAs(Yii::app()->basePath.'/uploads/transkrip/'.$filename);
+	  //           $model->transkrip = $filename;
+   //          } 
 
            
 
-             // ################## skl_tahfidz
-            $model->skl_tahfidz = CUploadedFile::getInstance($model, 'skl_tahfidz');
-			if ($model->validate(array('skl_tahfidz'))) {
+   //           // ################## skl_tahfidz
+   //          $model->skl_tahfidz = CUploadedFile::getInstance($model, 'skl_tahfidz');
+			// if ($model->validate(array('skl_tahfidz'))) {
                
-                $type = $model->skl_tahfidz->getExtensionName();
-	            $filename = 'skl_tahfidz_'.$model->nim.'.'.$type;
-	            $model->skl_tahfidz->saveAs(Yii::app()->basePath.'/uploads/skl_tahfidz/'.$filename);
-	            $model->skl_tahfidz = $filename;
-            }
+   //              $type = $model->skl_tahfidz->getExtensionName();
+	  //           $filename = 'skl_tahfidz_'.$model->nim.'.'.$type;
+	  //           $model->skl_tahfidz->saveAs(Yii::app()->basePath.'/uploads/skl_tahfidz/'.$filename);
+	  //           $model->skl_tahfidz = $filename;
+   //          }
 
            
 
-             // ################## kwitansi_wisuda
-            $model->kwitansi_wisuda = CUploadedFile::getInstance($model, 'kwitansi_wisuda');
-			if ($model->validate(array('kwitansi_wisuda'))) {
+   //           // ################## kwitansi_wisuda
+   //          $model->kwitansi_wisuda = CUploadedFile::getInstance($model, 'kwitansi_wisuda');
+			// if ($model->validate(array('kwitansi_wisuda'))) {
                 
-                 $type = $model->kwitansi_wisuda->getExtensionName();
-	            $filename = 'kwitansi_wisuda_'.$model->nim.'.'.$type;
-	            $model->kwitansi_wisuda->saveAs(Yii::app()->basePath.'/uploads/kwitansi_wisuda/'.$filename);
-	            $model->kwitansi_wisuda = $filename;
-            } 
+   //               $type = $model->kwitansi_wisuda->getExtensionName();
+	  //           $filename = 'kwitansi_wisuda_'.$model->nim.'.'.$type;
+	  //           $model->kwitansi_wisuda->saveAs(Yii::app()->basePath.'/uploads/kwitansi_wisuda/'.$filename);
+	  //           $model->kwitansi_wisuda = $filename;
+   //          } 
 
            
 
-             // ################## tanda_keluar_asrama
-            $model->tanda_keluar_asrama = CUploadedFile::getInstance($model, 'tanda_keluar_asrama');
-			if ($model->validate(array('tanda_keluar_asrama'))) {
-                if(!empty($model->tanda_keluar_asrama)){
-	            	$type = $model->tanda_keluar_asrama->getExtensionName();
-		            $filename = 'tanda_keluar_asrama_'.$model->nim.'.'.$type;
-		            $model->tanda_keluar_asrama->saveAs(Yii::app()->basePath.'/uploads/tanda_keluar_asrama/'.$filename);
-		            $model->tanda_keluar_asrama = $filename;
-		        }
-            } 
+   //           // ################## tanda_keluar_asrama
+   //          $model->tanda_keluar_asrama = CUploadedFile::getInstance($model, 'tanda_keluar_asrama');
+			// if ($model->validate(array('tanda_keluar_asrama'))) {
+   //              if(!empty($model->tanda_keluar_asrama)){
+	  //           	$type = $model->tanda_keluar_asrama->getExtensionName();
+		 //            $filename = 'tanda_keluar_asrama_'.$model->nim.'.'.$type;
+		 //            $model->tanda_keluar_asrama->saveAs(Yii::app()->basePath.'/uploads/tanda_keluar_asrama/'.$filename);
+		 //            $model->tanda_keluar_asrama = $filename;
+		 //        }
+   //          } 
 
             
 
-              // ################## surat_jalan
-            $model->surat_jalan = CUploadedFile::getInstance($model, 'surat_jalan');
-			if ($model->validate(array('surat_jalan'))) {
+   //            // ################## surat_jalan
+   //          $model->surat_jalan = CUploadedFile::getInstance($model, 'surat_jalan');
+			// if ($model->validate(array('surat_jalan'))) {
                 
-                if(!empty($model->surat_jalan)){
-                	$type = $model->surat_jalan->getExtensionName();
-		            $filename = 'surat_jalan_'.$model->nim.'.'.$type;
-		            $model->surat_jalan->saveAs(Yii::app()->basePath.'/uploads/surat_jalan/'.$filename);
-		            $model->surat_jalan = $filename;
-		        }
-            }
+   //              if(!empty($model->surat_jalan)){
+   //              	$type = $model->surat_jalan->getExtensionName();
+		 //            $filename = 'surat_jalan_'.$model->nim.'.'.$type;
+		 //            $model->surat_jalan->saveAs(Yii::app()->basePath.'/uploads/surat_jalan/'.$filename);
+		 //            $model->surat_jalan = $filename;
+		 //        }
+   //          }
             
 
-              // ################## skripsi
-            $model->skripsi = CUploadedFile::getInstance($model, 'skripsi');
-			if ($model->validate(array('skripsi'))) {
-                $type = $model->skripsi->getExtensionName();
-	            $filename = 'skripsi_'.$model->nim.'.'.$type;
-	            $model->skripsi->saveAs(Yii::app()->basePath.'/uploads/skripsi/'.$filename);
-	            $model->skripsi = $filename;
-            } 
+   //            // ################## skripsi
+   //          $model->skripsi = CUploadedFile::getInstance($model, 'skripsi');
+			// if ($model->validate(array('skripsi'))) {
+   //              $type = $model->skripsi->getExtensionName();
+	  //           $filename = 'skripsi_'.$model->nim.'.'.$type;
+	  //           $model->skripsi->saveAs(Yii::app()->basePath.'/uploads/skripsi/'.$filename);
+	  //           $model->skripsi = $filename;
+   //          } 
 
            
 
-             // ################## abstrak
-            $model->abstrak = CUploadedFile::getInstance($model, 'abstrak');
-			if ($model->validate(array('abstrak'))) {
+   //           // ################## abstrak
+   //          $model->abstrak = CUploadedFile::getInstance($model, 'abstrak');
+			// if ($model->validate(array('abstrak'))) {
                 
-                $type = $model->abstrak->getExtensionName();
-	            $filename = 'abstrak_'.$model->nim.'.'.$type;
-	            $model->abstrak->saveAs(Yii::app()->basePath.'/uploads/abstrak/'.$filename);
-	            $model->abstrakab = $filename;
-            } 
+   //              $type = $model->abstrak->getExtensionName();
+	  //           $filename = 'abstrak_'.$model->nim.'.'.$type;
+	  //           $model->abstrak->saveAs(Yii::app()->basePath.'/uploads/abstrak/'.$filename);
+	  //           $model->abstrakab = $filename;
+   //          } 
 
            
 			if($model->save()){
 				Yii::app()->user->setFlash('success','Terima kasih telah mendaftar');
-				$this->redirect(array('peserta/create'));
+				$this->redirect(array('peserta/index'));
 			}
 		}
 

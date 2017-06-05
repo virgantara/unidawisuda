@@ -18,6 +18,20 @@ p,div{
 }
 
 </style>
+
+<?php if(Yii::app()->user->hasFlash('success')){ ?>
+
+<div class="flash-success">
+  <?php echo Yii::app()->user->getFlash('success'); ?>
+</div>
+
+<?php
+
+}
+
+
+ ?>
+
 <div style="text-align: center;">
 <h1>MAKLUMAT</h1>
 <h2>1864/B-a/BAAK/K/VII/1438</h2>
