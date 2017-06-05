@@ -55,6 +55,7 @@ class Peserta extends CActiveRecord
 		return array(
 			array('nim, nama_lengkap, fakultas, prodi, tempat_lahir, tanggal_lahir, jenis_kelamin, status_warga, warga_negara, alamat, no_telp, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu, pas_photo, ijazah, akta_kelahiran, kwitansi_jilid, surat_bebas_pinjaman, resume_skripsi, surat_bebas_tunggakan, transkrip, skl_tahfidz, kwitansi_wisuda, skripsi, abstrak,kampus,kmi', 'required'),
 			array('nim', 'length', 'max'=>50),
+			array('nim', 'numerical', 'integerOnly'=>true),
 			array('nim','unique'),
 			array('nama_lengkap', 'length', 'max'=>255),
 			array('tanda_keluar_asrama','cekKampus'),
