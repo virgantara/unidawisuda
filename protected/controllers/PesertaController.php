@@ -282,7 +282,7 @@ class PesertaController extends Controller
 	        Yii::import("ext.EAjaxUpload.qqFileUploader");
 	 		if(Yii::app()->user->hasState("nim"))
 	 		{
-				$nim = 'sbp_'.Yii::app()->user->getState("nim");
+				$nim = 'sbt_'.Yii::app()->user->getState("nim");
 		        $folder=Yii::app()->basePath.'/../uploads/surat_bebas_tunggakan/';// folder for uploaded files
 		        $allowedExtensions = array("jpg","png","pdf");//array("jpg","jpeg","gif","exe","mov" and etc...
 		        $sizeLimit = 2 * 1024 * 1024;// maximum file size in bytes
