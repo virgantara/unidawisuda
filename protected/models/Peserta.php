@@ -149,7 +149,7 @@ class Peserta extends CActiveRecord
     	// print_r($params);exit;
 		$kampus = $this->kampus;
 		$kmi = $this->kmi;
-		if($kampus == 'Siman' && $kmi == 'Non-KMI')
+		if($kampus == 'Siman' && $kmi == 'Non-KMI' && empty($this->surat_bebas_tunggakan))
             $this->addError($attribute, $attribute.' cannot be blank.');
     }
 
