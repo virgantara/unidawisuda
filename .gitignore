@@ -1,6 +1,8 @@
 assets/*
 
 protected/runtime/*
+uploads/*
+uploads/*/*
 
 database.php
 
