@@ -787,10 +787,10 @@ class PesertaController extends Controller
 	{
 		$this->layout = "//layouts/column1";
 
-		$setting = Setting::model()->findByPk(1);
+		$settings = Setting::model()->findAll();
 
 		$this->render('index',array(
-			'setting' => $setting
+			'settings' => $settings
 		));
 	}
 

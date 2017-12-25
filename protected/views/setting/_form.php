@@ -3,25 +3,23 @@
 /* @var $model Setting */
 /* @var $form CActiveForm */
 ?>
+
   <script type="text/javascript">
   window.onload = function()
 	{
-
+<?php 
+	if($model->isNewRecord || $model->kode_setting == 'MAKLUMAT')
+	{
+	?>
 
 		CKEDITOR.replace( 'Setting_konten' ,{
 			extraPlugins: 'font,colorbutton',
 		} );
 
-		CKEDITOR.replace( 'Setting_header' ,{
-			extraPlugins: 'font,colorbutton',
-		} );
-
-		CKEDITOR.replace( 'Setting_footer' ,{
-			extraPlugins: 'font,colorbutton',
-		} );
-	
 	};
-	
+	<?php 
+}
+	?>
 </script>
 <div class="form">
 
@@ -39,13 +37,18 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'kode_setting'); ?>
+		<?php echo $form->textField($model,'kode_setting',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'kode_setting'); ?>
+	</div>
+
+	
+	<div class="row">
 		<?php echo $form->labelEx($model,'konten'); ?>
 		<?php echo $form->textArea($model,'konten',array('rows'=>6, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'konten'); ?>
 	</div>
-
-
-
+	
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

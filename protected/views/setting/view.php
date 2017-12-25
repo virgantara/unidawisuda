@@ -22,8 +22,7 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id_post',
+		'kode_setting',
 		'konten',
-		'header',
-		'footer',
 	),
 )); ?>

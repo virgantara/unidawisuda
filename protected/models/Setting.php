@@ -5,9 +5,8 @@
  *
  * The followings are the available columns in table 'setting':
  * @property integer $id_post
+ * @property string $kode_setting
  * @property string $konten
- * @property string $header
- * @property string $footer
  */
 class Setting extends CActiveRecord
 {
@@ -27,10 +26,11 @@ class Setting extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('konten', 'required'),
+			array('kode_setting, konten', 'required'),
+			array('kode_setting', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_post, konten', 'safe', 'on'=>'search'),
+			array('id_post, kode_setting, konten', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,8 +52,8 @@ class Setting extends CActiveRecord
 	{
 		return array(
 			'id_post' => 'Id Post',
+			'kode_setting' => 'Kode Setting',
 			'konten' => 'Konten',
-			
 		);
 	}
 
@@ -76,8 +76,8 @@ class Setting extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_post',$this->id_post);
+		$criteria->compare('kode_setting',$this->kode_setting,true);
 		$criteria->compare('konten',$this->konten,true);
-	
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
