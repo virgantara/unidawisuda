@@ -786,7 +786,12 @@ class PesertaController extends Controller
 	public function actionIndex()
 	{
 		$this->layout = "//layouts/column1";
-		$this->render('index');
+
+		$setting = Setting::model()->findByPk(1);
+
+		$this->render('index',array(
+			'setting' => $setting
+		));
 	}
 
 	/**
