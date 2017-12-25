@@ -559,187 +559,57 @@ class PesertaController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Peserta;
+		$settings = Setting::model()->findAll();
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Peserta']))
+		$maklumat = '';
+		$batasupload = '';
+		foreach($settings as $setting)
 		{
-			$model->attributes=$_POST['Peserta'];
+		  if($setting->kode_setting == 'MAKLUMAT')
+		  {
+		    $maklumat = $setting->konten;
+		  }
 
-			// $model->pas_photo = CUploadedFile::getInstance($model, 'pas_photo');
-			// if ($model->validate(array('pas_photo'))) {
-   //              $type = $model->pas_photo->getExtensionName();
-	  //           $filename = 'pas_photo_'.$model->nim.'.'.$type;
-	  //           $model->pas_photo->saveAs(Yii::app()->basePath.'/../uploads/pas_photo/'.$filename);
-	  //           $model->pas_photo = $filename;
-   //          } 
-            
-
-   //          // ################## IJAZAH
-   //          $model->ijazah = CUploadedFile::getInstance($model, 'ijazah');
-			// if ($model->validate(array('ijazah'))) {
-                
-   //          	$type = $model->ijazah->getExtensionName();
-	  //           $filename = 'ijazah_'.$model->nim.'.'.$type;
-	  //           $model->ijazah->saveAs(Yii::app()->basePath.'/../uploads/ijazah/'.$filename);
-	  //           $model->ijazah = $filename;
-   //          } 
-            
-
-   //          // ################## akta_kelahiran
-   //          $model->akta_kelahiran = CUploadedFile::getInstance($model, 'akta_kelahiran');
-			// if ($model->validate(array('akta_kelahiran'))) {
-   //              $type = $model->akta_kelahiran->getExtensionName();
-	  //           $filename = 'akta_kelahiran_'.$model->nim.'.'.$type;
-	  //           $model->akta_kelahiran->saveAs(Yii::app()->basePath.'/../uploads/akta_kelahiran/'.$filename);
-	  //           $model->akta_kelahiran = $filename;
-   //          } 
-
-            
-
-   //          // ################## kwitansi_jilid
-   //          $model->kwitansi_jilid = CUploadedFile::getInstance($model, 'kwitansi_jilid');
-			// if ($model->validate(array('kwitansi_jilid'))) {
-
-   //              $type = $model->kwitansi_jilid->getExtensionName();
-	  //           $filename = 'kwitansi_jilid_'.$model->nim.'.'.$type;
-	  //           $model->kwitansi_jilid->saveAs(Yii::app()->basePath.'/../uploads/kwitansi_jilid/'.$filename);
-	  //           $model->kwitansi_jilid = $filename;
-   //          } 
-            
-
-   //          // ################## surat_bebas_pinjaman
-   //          $model->surat_bebas_pinjaman = CUploadedFile::getInstance($model, 'surat_bebas_pinjaman');
-			// if ($model->validate(array('surat_bebas_pinjaman'))) {
-
-   //              $type = $model->surat_bebas_pinjaman->getExtensionName();
-	  //           $filename = 'surat_bebas_pinjaman_'.$model->nim.'.'.$type;
-	  //           $model->surat_bebas_pinjaman->saveAs(Yii::app()->basePath.'/../uploads/surat_bebas_pinjaman/'.$filename);
-	  //           $model->surat_bebas_pinjaman = $filename;
-   //          } 
-
-            
-
-   //          // ################## resume_skripsi
-   //          $model->resume_skripsi = CUploadedFile::getInstance($model, 'resume_skripsi');
-			// if ($model->validate(array('resume_skripsi'))) {
-
- 		// 		$type = $model->resume_skripsi->getExtensionName();
-	  //           $filename = 'resume_skripsi_'.$model->nim.'.'.$type;
-	  //           $model->resume_skripsi->saveAs(Yii::app()->basePath.'/../uploads/resume_skripsi/'.$filename);
-	  //           $model->resume_skripsi = $filename;
-   //          }
-
-            
-
-   //          // ################## surat_bebas_tunggakan
-   //          $model->surat_bebas_tunggakan = CUploadedFile::getInstance($model, 'surat_bebas_tunggakan');
-			// if ($model->validate(array('surat_bebas_tunggakan'))) {
-
-   //          	 $type = $model->surat_bebas_tunggakan->getExtensionName();
-	  //           $filename = 'surat_bebas_tunggakan_'.$model->nim.'.'.$type;
-	  //           $model->surat_bebas_tunggakan->saveAs(Yii::app()->basePath.'/../uploads/surat_bebas_tunggakan/'.$filename);
-	  //           $model->surat_bebas_tunggakan = $filename;
-
-   //          } 
+		  else if($setting->kode_setting == 'BATASUPLOAD')
+		  {
+		    $batasupload = $setting->konten;
+		  }
+		}
+		// echo $maklumat;
 
 
-           
-   //          // ################## transkrip
-   //          $model->transkrip = CUploadedFile::getInstance($model, 'transkrip');
-			// if ($model->validate(array('transkrip'))) {
+		$timenow = date('Y-m-d H:i:s');
+		$timebatas = date('Y-m-d H:i:s',strtotime($batasupload));
 
-   //               $type = $model->transkrip->getExtensionName();
-	  //           $filename = 'transkrip_'.$model->nim.'.'.$type;
-	  //           $model->transkrip->saveAs(Yii::app()->basePath.'/../uploads/transkrip/'.$filename);
-	  //           $model->transkrip = $filename;
-   //          } 
+		$d1 = new DateTime($timenow);
+		$d2 = new DateTime($timebatas);
 
-           
+		if($d1 <= $d2)
+		{
+			$model=new Peserta;
 
-   //           // ################## skl_tahfidz
-   //          $model->skl_tahfidz = CUploadedFile::getInstance($model, 'skl_tahfidz');
-			// if ($model->validate(array('skl_tahfidz'))) {
-               
-   //              $type = $model->skl_tahfidz->getExtensionName();
-	  //           $filename = 'skl_tahfidz_'.$model->nim.'.'.$type;
-	  //           $model->skl_tahfidz->saveAs(Yii::app()->basePath.'/../uploads/skl_tahfidz/'.$filename);
-	  //           $model->skl_tahfidz = $filename;
-   //          }
+			// Uncomment the following line if AJAX validation is needed
+			// $this->performAjaxValidation($model);
 
-           
-
-   //           // ################## kwitansi_wisuda
-   //          $model->kwitansi_wisuda = CUploadedFile::getInstance($model, 'kwitansi_wisuda');
-			// if ($model->validate(array('kwitansi_wisuda'))) {
-                
-   //               $type = $model->kwitansi_wisuda->getExtensionName();
-	  //           $filename = 'kwitansi_wisuda_'.$model->nim.'.'.$type;
-	  //           $model->kwitansi_wisuda->saveAs(Yii::app()->basePath.'/../uploads/kwitansi_wisuda/'.$filename);
-	  //           $model->kwitansi_wisuda = $filename;
-   //          } 
-
-           
-
-   //           // ################## tanda_keluar_asrama
-   //          $model->tanda_keluar_asrama = CUploadedFile::getInstance($model, 'tanda_keluar_asrama');
-			// if ($model->validate(array('tanda_keluar_asrama'))) {
-   //              if(!empty($model->tanda_keluar_asrama)){
-	  //           	$type = $model->tanda_keluar_asrama->getExtensionName();
-		 //            $filename = 'tanda_keluar_asrama_'.$model->nim.'.'.$type;
-		 //            $model->tanda_keluar_asrama->saveAs(Yii::app()->basePath.'/../uploads/tanda_keluar_asrama/'.$filename);
-		 //            $model->tanda_keluar_asrama = $filename;
-		 //        }
-   //          } 
-
-            
-
-   //            // ################## surat_jalan
-   //          $model->surat_jalan = CUploadedFile::getInstance($model, 'surat_jalan');
-			// if ($model->validate(array('surat_jalan'))) {
-                
-   //              if(!empty($model->surat_jalan)){
-   //              	$type = $model->surat_jalan->getExtensionName();
-		 //            $filename = 'surat_jalan_'.$model->nim.'.'.$type;
-		 //            $model->surat_jalan->saveAs(Yii::app()->basePath.'/../uploads/surat_jalan/'.$filename);
-		 //            $model->surat_jalan = $filename;
-		 //        }
-   //          }
-            
-
-   //            // ################## skripsi
-   //          $model->skripsi = CUploadedFile::getInstance($model, 'skripsi');
-			// if ($model->validate(array('skripsi'))) {
-   //              $type = $model->skripsi->getExtensionName();
-	  //           $filename = 'skripsi_'.$model->nim.'.'.$type;
-	  //           $model->skripsi->saveAs(Yii::app()->basePath.'/../uploads/skripsi/'.$filename);
-	  //           $model->skripsi = $filename;
-   //          } 
-
-           
-
-   //           // ################## abstrak
-   //          $model->abstrak = CUploadedFile::getInstance($model, 'abstrak');
-			// if ($model->validate(array('abstrak'))) {
-                
-   //              $type = $model->abstrak->getExtensionName();
-	  //           $filename = 'abstrak_'.$model->nim.'.'.$type;
-	  //           $model->abstrak->saveAs(Yii::app()->basePath.'/../uploads/abstrak/'.$filename);
-	  //           $model->abstrakab = $filename;
-   //          } 
-
-           
-			if($model->save()){
-				Yii::app()->user->setFlash('success','Terima kasih telah mendaftar');
-				$this->redirect(array('peserta/index'));
+			if(isset($_POST['Peserta']))
+			{
+				$model->attributes=$_POST['Peserta'];
+	           
+				if($model->save()){
+					Yii::app()->user->setFlash('success','Terima kasih telah mendaftar');
+					$this->redirect(array('peserta/index'));
+				}
 			}
+
+			$this->render('create',array(
+				'model'=>$model,
+			));
 		}
 
-		$this->render('create',array(
-			'model'=>$model,
-		));
+		else
+		{
+			echo 'Melebihi batas waktu UPLOAD';
+		}
 	}
 
 	/**
