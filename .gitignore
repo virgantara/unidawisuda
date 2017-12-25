@@ -4,6 +4,9 @@ protected/runtime/*
 
 database.php
 
+uploads/*
+uploads/*/*
+
 *.zip
 
 *.sql
