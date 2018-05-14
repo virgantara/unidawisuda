@@ -36,16 +36,31 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'kode_setting'); ?>
-		<?php echo $form->textField($model,'kode_setting',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'kode_setting'); ?>
-	</div>
-
+	
 	
 	<div class="row">
 		<?php echo $form->labelEx($model,'konten'); ?>
-		<?php echo $form->textArea($model,'konten',array('rows'=>6, 'cols'=>50)); ?>
+		<?php 
+		if($model->kode_setting=='BATASUPLOAD')
+		{
+			  $this->widget('application.extensions.timepicker.EJuiDateTimePicker',array(
+                    'model'=>$model,
+                    'attribute'=>'konten',
+                    'options'=>array(
+                       'showAnim'=>'slide',
+                        'showSecond'=>true,
+                        'timeFormat' => 'hh:mm:ss',
+                        'dateFormat'=>'yy-mm-dd',
+                        'changeMonth' => true,
+                        'changeYear' => true,
+                        
+                    ),
+        	));
+		}
+		else
+			echo $form->textArea($model,'konten',array('rows'=>6, 'cols'=>50)); 
+
+		?>
 		<?php echo $form->error($model,'konten'); ?>
 	</div>
 	

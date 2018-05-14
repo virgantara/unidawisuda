@@ -18,11 +18,6 @@ $this->menu=array(
 
 <h1>View Setting #<?php echo $model->id_post; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id_post',
-		'kode_setting',
-		'konten',
-	),
-)); ?>
+<?php 
+echo $model->konten;
+ ?>
