@@ -28,7 +28,9 @@ class PesertaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','getProdi','setSessionNIM','uploadPasPhoto','uploadIjazah','uploadAkta','uploadKwitansiJilid','uploadSBP','uploadResume','uploadSBT','uploadTranskrip','uploadSKL','uploadKwitansiWisuda','uploadSuratJalan','uploadSkripsi','uploadAbstrak','export','uploadTandaKeluar'),
+				'actions'=>array('index','view','create','getProdi','setSessionNIM','uploadPasPhoto','uploadIjazah','uploadAkta','uploadKwitansiJilid','uploadSBP','uploadResume','uploadSBT','uploadTranskrip','uploadSKL','uploadKwitansiWisuda','uploadSuratJalan','uploadSkripsi','uploadAbstrak','export','uploadTandaKeluar',
+					'uploadBuktiRevisiBahasa','uploadBuktiLayouter','uploadBuktiPerpus'
+			),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -43,6 +45,99 @@ class PesertaController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionUploadBuktiPerpus()
+	{
+        Yii::import("ext.EAjaxUpload.qqFileUploader");
+ 		if(Yii::app()->user->hasState("nim"))
+ 		{
+			$nim = 'bpp_'.Yii::app()->user->getState("nim");
+	        $folder=Yii::app()->basePath.'/../uploads/bukti_perpus/';// folder for uploaded files
+	        $allowedExtensions = array("pdf");//array("jpg","jpeg","gif","exe","mov" and etc...
+	        $sizeLimit = 1 * 1024 * 1024;// maximum file size in bytes
+	        $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+	        $result = $uploader->handleUpload($folder,$nim,true);
+	        $return = htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+	 
+	        $fileSize=filesize($folder.$result['filename']);//GETTING FILE SIZE
+	        $fileName=$result['filename'];//GETTING FILE NAME
+	 
+	        echo $return;// it's array	 			
+ 		}
+
+ 		else{
+ 			$return = array(
+ 				'error' => 'NIM harus diisi dulu'
+ 			);
+
+ 			$return = htmlspecialchars(json_encode($return), ENT_NOQUOTES);
+	 
+
+ 			echo $return;
+ 		}
+	}
+
+	public function actionUploadBuktiLayouter()
+	{
+        Yii::import("ext.EAjaxUpload.qqFileUploader");
+ 		if(Yii::app()->user->hasState("nim"))
+ 		{
+			$nim = 'bly_'.Yii::app()->user->getState("nim");
+	        $folder=Yii::app()->basePath.'/../uploads/bukti_layouter/';// folder for uploaded files
+	        $allowedExtensions = array("pdf");//array("jpg","jpeg","gif","exe","mov" and etc...
+	        $sizeLimit = 1 * 1024 * 1024;// maximum file size in bytes
+	        $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+	        $result = $uploader->handleUpload($folder,$nim,true);
+	        $return = htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+	 
+	        $fileSize=filesize($folder.$result['filename']);//GETTING FILE SIZE
+	        $fileName=$result['filename'];//GETTING FILE NAME
+	 
+	        echo $return;// it's array	 			
+ 		}
+
+ 		else{
+ 			$return = array(
+ 				'error' => 'NIM harus diisi dulu'
+ 			);
+
+ 			$return = htmlspecialchars(json_encode($return), ENT_NOQUOTES);
+	 
+
+ 			echo $return;
+ 		}
+	}
+
+	public function actionUploadBuktiRevisiBahasa()
+	{
+        Yii::import("ext.EAjaxUpload.qqFileUploader");
+ 		if(Yii::app()->user->hasState("nim"))
+ 		{
+			$nim = 'brb_'.Yii::app()->user->getState("nim");
+	        $folder=Yii::app()->basePath.'/../uploads/bukti_revisi_bahasa/';// folder for uploaded files
+	        $allowedExtensions = array("pdf");//array("jpg","jpeg","gif","exe","mov" and etc...
+	        $sizeLimit = 1 * 1024 * 1024;// maximum file size in bytes
+	        $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+	        $result = $uploader->handleUpload($folder,$nim,true);
+	        $return = htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+	 
+	        $fileSize=filesize($folder.$result['filename']);//GETTING FILE SIZE
+	        $fileName=$result['filename'];//GETTING FILE NAME
+	 
+	        echo $return;// it's array	 			
+ 		}
+
+ 		else{
+ 			$return = array(
+ 				'error' => 'NIM harus diisi dulu'
+ 			);
+
+ 			$return = htmlspecialchars(json_encode($return), ENT_NOQUOTES);
+	 
+
+ 			echo $return;
+ 		}
 	}
 
 	public function actionExport()

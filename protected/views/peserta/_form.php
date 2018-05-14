@@ -354,35 +354,41 @@ array(
 		 echo $form->error($model,'akta_kelahiran'); ?>
 		</td>
 	</tr>
-	<tr>
-		<td class="col"><?php echo $form->labelEx($model,'kwitansi_jilid'); ?></td>
-		<td class="col"><?php
-$this->widget('ext.EAjaxUpload.EAjaxUpload',
-array(
-        'id'=>'uploadkwitansi_jilid',
-        'config'=>array(
-               'action'=>Yii::app()->createUrl('peserta/uploadKwitansiJilid'),
-               'allowedExtensions'=>array("jpg","png","pdf"),//array("jpg","jpeg","gif","exe","mov" and etc...
-               'sizeLimit'=>2*1024*1024,// maximum file size in bytes
-               'minSizeLimit'=>512,// minimum file size in bytes
-               'onComplete'=>"js:function(id, fileName, responseJSON){ 
-               		$('#Peserta_kwitansi_jilid').val(responseJSON.filename);
-               	 }",
-               'messages'=>array(
-                                'typeError'=>"{file} has invalid extension. Only {extensions} are allowed.",
-                                'sizeError'=>"{file} is too large, maximum file size is {sizeLimit}.",
-                                'minSizeError'=>"{file} is too small, minimum file size is {minSizeLimit}.",
-                                'emptyError'=>"{file} is empty, please select files again without it.",
-                                'onLeave'=>"The files are being uploaded, if you leave now the upload will be cancelled."
-                               ),
-               'showMessage'=>"js:function(message){ alert(message); }"
-              )
-)); 
+<!-- 	<tr>
+		<td class="col"> -->
+			<?php
+			 // echo $form->labelEx($model,'kwitansi_jilid'); 
+			 ?>
+				
+		<!-- 	</td>
+		<td class="col"> --><?php
+// $this->widget('ext.EAjaxUpload.EAjaxUpload',
+// array(
+//         'id'=>'uploadkwitansi_jilid',
+//         'config'=>array(
+//                'action'=>Yii::app()->createUrl('peserta/uploadKwitansiJilid'),
+//                'allowedExtensions'=>array("jpg","png","pdf"),//array("jpg","jpeg","gif","exe","mov" and etc...
+//                'sizeLimit'=>2*1024*1024,// maximum file size in bytes
+//                'minSizeLimit'=>512,// minimum file size in bytes
+//                'onComplete'=>"js:function(id, fileName, responseJSON){ 
+//                		$('#Peserta_kwitansi_jilid').val(responseJSON.filename);
+//                	 }",
+//                'messages'=>array(
+//                                 'typeError'=>"{file} has invalid extension. Only {extensions} are allowed.",
+//                                 'sizeError'=>"{file} is too large, maximum file size is {sizeLimit}.",
+//                                 'minSizeError'=>"{file} is too small, minimum file size is {minSizeLimit}.",
+//                                 'emptyError'=>"{file} is empty, please select files again without it.",
+//                                 'onLeave'=>"The files are being uploaded, if you leave now the upload will be cancelled."
+//                                ),
+//                'showMessage'=>"js:function(message){ alert(message); }"
+//               )
+// )); 
 
-		 echo $form->hiddenField($model,'kwitansi_jilid');
-		 echo $form->error($model,'kwitansi_jilid'); ?>
-		</td>
-	</tr>
+// 		 echo $form->hiddenField($model,'kwitansi_jilid');
+// 		 echo $form->error($model,'kwitansi_jilid');
+		  ?>
+		<!-- </td>
+	</tr> -->
 		
 	<tr>
 		<td class="col"><?php echo $form->labelEx($model,'surat_bebas_pinjaman'); ?>
@@ -561,7 +567,7 @@ echo $form->hiddenField($model,'kwitansi_wisuda');
 	</tr>
 	<tr>
 		<td class="col"><?php echo $form->labelEx($model,'tanda_keluar_asrama'); ?>
-			<small>Khusus Mahasiswa Siman</small>
+			<small>(Khusus Mahasiswa Siman)</small>
 		</td>
 		<td class="col"><?php
 
@@ -594,7 +600,7 @@ array(
 	</tr>
 	<tr>
 		<td class="col"><?php echo $form->labelEx($model,'surat_jalan'); ?>
-			<small>Khusus Mahasiswa Siman</small>
+			<small>(Khusus Mahasiswa Siman)</small>
 		</td>
 		<td class="col"><?php
 
@@ -686,7 +692,99 @@ array(
 		 echo $form->error($model,'abstrak'); ?>
 		</td>
 	</tr>	
-	
+	<tr>
+		<td class="col"><?php echo $form->labelEx($model,'bukti_revisi_bahasa'); ?>
+			<small>(filetype: pdf)</small>
+		</td>
+		<td class="col"><?php
+
+$this->widget('ext.EAjaxUpload.EAjaxUpload',
+array(
+        'id'=>'uploadrevisibahasa',
+        'config'=>array(
+               'action'=>Yii::app()->createUrl('peserta/uploadBuktiRevisiBahasa'),
+               'allowedExtensions'=>array("pdf"),//array("jpg","jpeg","gif","exe","mov" and etc...
+               'sizeLimit'=>1*1024*1024,// maximum file size in bytes
+               'minSizeLimit'=>512,// minimum file size in bytes
+               'onComplete'=>"js:function(id, fileName, responseJSON){ 
+               		$('#Peserta_bukti_revisi_bahasa').val(responseJSON.filename);
+               	 }",
+               'messages'=>array(
+                                'typeError'=>"{file} has invalid extension. Only {extensions} are allowed.",
+                                'sizeError'=>"{file} is too large, maximum file size is {sizeLimit}.",
+                                'minSizeError'=>"{file} is too small, minimum file size is {minSizeLimit}.",
+                                'emptyError'=>"{file} is empty, please select files again without it.",
+                                'onLeave'=>"The files are being uploaded, if you leave now the upload will be cancelled."
+                               ),
+               'showMessage'=>"js:function(message){ alert(message); }"
+              )
+)); 	
+		 echo $form->hiddenField($model,'bukti_revisi_bahasa');
+		 echo $form->error($model,'bukti_revisi_bahasa'); ?>
+		</td>
+	</tr>	
+	<tr>
+		<td class="col"><?php echo $form->labelEx($model,'bukti_layouter'); ?>
+			<small>(filetype: pdf)</small>
+		</td>
+		<td class="col"><?php
+
+$this->widget('ext.EAjaxUpload.EAjaxUpload',
+array(
+        'id'=>'uploadlayouter',
+        'config'=>array(
+               'action'=>Yii::app()->createUrl('peserta/uploadBuktiLayouter'),
+               'allowedExtensions'=>array("pdf"),//array("jpg","jpeg","gif","exe","mov" and etc...
+               'sizeLimit'=>1*1024*1024,// maximum file size in bytes
+               'minSizeLimit'=>512,// minimum file size in bytes
+               'onComplete'=>"js:function(id, fileName, responseJSON){ 
+               		$('#Peserta_bukti_revisi_bahasa').val(responseJSON.filename);
+               	 }",
+               'messages'=>array(
+                                'typeError'=>"{file} has invalid extension. Only {extensions} are allowed.",
+                                'sizeError'=>"{file} is too large, maximum file size is {sizeLimit}.",
+                                'minSizeError'=>"{file} is too small, minimum file size is {minSizeLimit}.",
+                                'emptyError'=>"{file} is empty, please select files again without it.",
+                                'onLeave'=>"The files are being uploaded, if you leave now the upload will be cancelled."
+                               ),
+               'showMessage'=>"js:function(message){ alert(message); }"
+              )
+)); 	
+		 echo $form->hiddenField($model,'bukti_layouter');
+		 echo $form->error($model,'bukti_layouter'); ?>
+		</td>
+	</tr>	
+	<tr>
+		<td class="col"><?php echo $form->labelEx($model,'bukti_perpus'); ?>
+			<small>(filetype: pdf)</small>
+		</td>
+		<td class="col"><?php
+
+$this->widget('ext.EAjaxUpload.EAjaxUpload',
+array(
+        'id'=>'uploadperpus',
+        'config'=>array(
+               'action'=>Yii::app()->createUrl('peserta/uploadBuktiPerpus'),
+               'allowedExtensions'=>array("pdf"),//array("jpg","jpeg","gif","exe","mov" and etc...
+               'sizeLimit'=>1*1024*1024,// maximum file size in bytes
+               'minSizeLimit'=>512,// minimum file size in bytes
+               'onComplete'=>"js:function(id, fileName, responseJSON){ 
+               		$('#Peserta_bukti_revisi_bahasa').val(responseJSON.filename);
+               	 }",
+               'messages'=>array(
+                                'typeError'=>"{file} has invalid extension. Only {extensions} are allowed.",
+                                'sizeError'=>"{file} is too large, maximum file size is {sizeLimit}.",
+                                'minSizeError'=>"{file} is too small, minimum file size is {minSizeLimit}.",
+                                'emptyError'=>"{file} is empty, please select files again without it.",
+                                'onLeave'=>"The files are being uploaded, if you leave now the upload will be cancelled."
+                               ),
+               'showMessage'=>"js:function(message){ alert(message); }"
+              )
+)); 	
+		 echo $form->hiddenField($model,'bukti_perpus');
+		 echo $form->error($model,'bukti_perpus'); ?>
+		</td>
+	</tr>	
 	</table>
 
 

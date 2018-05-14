@@ -54,11 +54,11 @@ $this->menu=array(
             'type'=>'raw',
         	'value'=>CHtml::link(CHtml::encode($model->akta_kelahiran), Yii::app()->baseUrl.'/uploads/akta_kelahiran/'.$model->akta_kelahiran)
         ),
-		 array(
-		 	'label'=>'Kwitansi Penjilidan',
-            'type'=>'raw',
-        	'value'=>CHtml::link(CHtml::encode($model->kwitansi_jilid), Yii::app()->baseUrl.'/uploads/kwitansi_jilid/'.$model->kwitansi_jilid)
-        ),
+		 // array(
+		 // 	'label'=>'Kwitansi Penjilidan',
+   //          'type'=>'raw',
+   //      	'value'=>CHtml::link(CHtml::encode($model->kwitansi_jilid), Yii::app()->baseUrl.'/uploads/kwitansi_jilid/'.$model->kwitansi_jilid)
+   //      ),
 		 array(
 		 	'label'=>'Surat Bebas Pinjaman',
             'type'=>'raw',
@@ -109,5 +109,20 @@ $this->menu=array(
             'type'=>'raw',
         	'value'=>CHtml::link(CHtml::encode($model->abstrak), Yii::app()->baseUrl.'/uploads/abstrak/'.$model->abstrak)
         ),
+		 array(
+		 	'label'=>'Bukti Revisi Bahasa dan Naskah Jurnal',
+            'type'=>'raw',
+        	'value'=>CHtml::link(CHtml::encode($model->bukti_revisi_bahasa), Yii::app()->baseUrl.'/uploads/bukti_revisi_bahasa/'.$model->bukti_revisi_bahasa)
+        ),
+        array(
+		 	'label'=>'Bukti Layouter',
+            'type'=>'raw',
+        	'value'=>CHtml::link(CHtml::encode($model->bukti_layouter), Yii::app()->baseUrl.'/uploads/bukti_layouter/'.$model->bukti_layouter)
+        ),   
+         array(
+		 	'label'=>'Bukti Perpus',
+            'type'=>'raw',
+        	'value'=>CHtml::link(CHtml::encode($model->bukti_perpus), Yii::app()->baseUrl.'/uploads/bukti_layouter/'.$model->bukti_perpus)
+        ),   
 	),
 )); ?>

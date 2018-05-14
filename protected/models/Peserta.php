@@ -53,7 +53,7 @@ class Peserta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nim, nama_lengkap, fakultas, prodi, tempat_lahir, tanggal_lahir, jenis_kelamin, status_warga, warga_negara, alamat, no_telp, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu, pas_photo, ijazah, akta_kelahiran, kwitansi_jilid, surat_bebas_pinjaman, resume_skripsi, surat_bebas_tunggakan, transkrip, skl_tahfidz, kwitansi_wisuda, skripsi, abstrak,kampus,kmi', 'required'),
+			array('nim, nama_lengkap, fakultas, prodi, tempat_lahir, tanggal_lahir, jenis_kelamin, status_warga, warga_negara, alamat, no_telp, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu, pas_photo, ijazah, akta_kelahiran, surat_bebas_pinjaman, resume_skripsi, surat_bebas_tunggakan, transkrip, skl_tahfidz, kwitansi_wisuda, skripsi, abstrak,kampus,kmi, bukti_revisi_bahasa, bukti_layouter, bukti_perpus', 'required'),
 			array('nim', 'length', 'max'=>50),
 			array('nim', 'numerical', 'integerOnly'=>true),
 			array('nim','unique'),
@@ -68,7 +68,7 @@ class Peserta extends CActiveRecord
    //          array('skripsi,surat_bebas_pinjaman', 'file', 'types' => 'pdf', 'allowEmpty' => true, 'maxSize' => 1024 * 1024 * 5, 'tooLarge' => 'The file was larger than 5MB. Please upload a smaller file.'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nim, nama_lengkap, fakultas, prodi, tempat_lahir, tanggal_lahir, jenis_kelamin, status_warga, warga_negara, alamat, no_telp, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu, pas_photo, ijazah, akta_kelahiran, kwitansi_jilid, surat_bebas_pinjaman, resume_skripsi, surat_bebas_tunggakan, transkrip, skl_tahfidz, kwitansi_wisuda, tanda_keluar_asrama, surat_jalan, skripsi, abstrak,status_validasi, kode_pendaftaran, kampus, kmi', 'safe', 'on'=>'search'),
+			array('id, nim, nama_lengkap, fakultas, prodi, tempat_lahir, tanggal_lahir, jenis_kelamin, status_warga, warga_negara, alamat, no_telp, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu, pas_photo, ijazah, akta_kelahiran, kwitansi_jilid, surat_bebas_pinjaman, resume_skripsi, surat_bebas_tunggakan, transkrip, skl_tahfidz, kwitansi_wisuda, tanda_keluar_asrama, surat_jalan, skripsi, abstrak,status_validasi, kode_pendaftaran, kampus, kmi,bukti_revisi_bahasa, bukti_layouter, bukti_perpus', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -111,16 +111,19 @@ class Peserta extends CActiveRecord
 			'akta_kelahiran' => 'Akta Kelahiran',
 			'kwitansi_jilid' => 'Kwitansi Jilid',
 			'surat_bebas_pinjaman' => 'Surat Bebas Pinjaman Buku Perpustakaan',
-			'resume_skripsi' => 'Resume Skripsi',
-			'surat_bebas_tunggakan' => 'Surat Bebas Tunggakan',
-			'transkrip' => 'Transkrip',
-			'skl_tahfidz' => 'Surat Keteranga Lulus Tahfidz',
-			'kwitansi_wisuda' => 'Kwitansi Wisuda',
+			'resume_skripsi' => 'Resume Skripsi/Naskah Jurnal',
+			'surat_bebas_tunggakan' => 'Surat Bebas Tunggakan Keuangan',
+			'transkrip' => 'Transkrip Sementara',
+			'skl_tahfidz' => 'Surat Keterangan Lulus Tahfidz',
+			'kwitansi_wisuda' => 'Kwitansi Pembayaran Wisuda',
 			'tanda_keluar_asrama' => 'Bukti Tanda Keluar Asrama',
 			'surat_jalan' => 'Surat Jalan',
-			'skripsi' => 'Skripsi',
-			'abstrak' => 'Abstrak',
+			'skripsi' => 'Skripsi yang sudah dilayout',
+			'abstrak' => 'Abstrak (Indonesia dan Arab/Inggris)',
 			'kampus' => 'Kampus',
+			'bukti_revisi_bahasa' => 'Bukti Revisi Bahasa dan Naskah Jurnal (Receipt 1)', 
+			'bukti_layouter' => 'Bukti Serah Terima Layouter (Receipt 2)', 
+			'bukti_perpus' => 'Bukti Perpustakaan (Receipt 3)'
 		);
 	}
 
