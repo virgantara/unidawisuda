@@ -30,7 +30,7 @@ class Periode extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('nama_periode, tahun, tanggal_buka, tanggal_tutup', 'required'),
-			array('status_aktivasi', 'numerical', 'integerOnly'=>true),
+			
 			array('nama_periode', 'length', 'max'=>255),
 			array('tahun', 'length', 'max'=>50),
 			// The following rule is used by search().

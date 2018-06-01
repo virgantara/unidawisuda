@@ -71,7 +71,7 @@ class PeriodeController extends Controller
 		{
 			$model->attributes=$_POST['Periode'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_periode));
+				$this->redirect(array('admin'));
 		}
 
 		$this->render('create',array(
@@ -95,7 +95,7 @@ class PeriodeController extends Controller
 		{
 			$model->attributes=$_POST['Periode'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_periode));
+				$this->redirect(array('admin'));
 		}
 
 		$this->render('update',array(
@@ -122,10 +122,7 @@ class PeriodeController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Periode');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+		$this->redirect(array('admin'));
 	}
 
 	/**

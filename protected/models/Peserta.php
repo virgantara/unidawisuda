@@ -68,7 +68,7 @@ class Peserta extends CActiveRecord
    //          array('skripsi,surat_bebas_pinjaman', 'file', 'types' => 'pdf', 'allowEmpty' => true, 'maxSize' => 1024 * 1024 * 5, 'tooLarge' => 'The file was larger than 5MB. Please upload a smaller file.'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nim, nama_lengkap, fakultas, prodi, tempat_lahir, tanggal_lahir, jenis_kelamin, status_warga, warga_negara, alamat, no_telp, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu, pas_photo, ijazah, akta_kelahiran, kwitansi_jilid, surat_bebas_pinjaman, resume_skripsi, surat_bebas_tunggakan, transkrip, skl_tahfidz, kwitansi_wisuda, tanda_keluar_asrama, surat_jalan, skripsi, abstrak,status_validasi, kode_pendaftaran, kampus, kmi,bukti_revisi_bahasa, bukti_layouter, bukti_perpus', 'safe', 'on'=>'search'),
+			array('id, nim, nama_lengkap, fakultas, prodi, tempat_lahir, tanggal_lahir, jenis_kelamin, status_warga, warga_negara, alamat, no_telp, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu, pas_photo, ijazah, akta_kelahiran, kwitansi_jilid, surat_bebas_pinjaman, resume_skripsi, surat_bebas_tunggakan, transkrip, skl_tahfidz, kwitansi_wisuda, tanda_keluar_asrama, surat_jalan, skripsi, abstrak,status_validasi, kode_pendaftaran, kampus, kmi,bukti_revisi_bahasa, bukti_layouter, bukti_perpus, periode_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -123,7 +123,8 @@ class Peserta extends CActiveRecord
 			'kampus' => 'Kampus',
 			'bukti_revisi_bahasa' => 'Bukti Revisi Bahasa dan Naskah Jurnal (Receipt 1)', 
 			'bukti_layouter' => 'Bukti Serah Terima Layouter (Receipt 2)', 
-			'bukti_perpus' => 'Bukti Perpustakaan (Receipt 3)'
+			'bukti_perpus' => 'Bukti Perpustakaan (Receipt 3)',
+			'periode_id' => 'Periode'
 		);
 	}
 
