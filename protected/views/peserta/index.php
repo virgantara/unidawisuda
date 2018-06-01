@@ -48,9 +48,10 @@ foreach($settings as $setting)
 echo $maklumat;
 
 $periode = Periode::model()->findByAttributes(array('status_aktivasi'=>'Y'));
+$tgl_tutup = !empty($periode) ? $periode->tanggal_tutup : date('Y-m-d H:i:s');
 
 $timenow = date('Y-m-d H:i:s');
-$timebatas = date('Y-m-d H:i:s',strtotime($periode->tanggal_tutup));
+$timebatas = date('Y-m-d H:i:s',strtotime($tgl_tutup));
 
 $d1 = new DateTime($timenow);
 $d2 = new DateTime($timebatas);

@@ -155,7 +155,12 @@ class PesertaController extends Controller
 	public function actionExport()
 	{
 		$this->layout = '';
-		$model = Peserta::model()->findAll();
+		$criteria=new CDbCriteria;
+		$periode = Periode::model()->findByAttributes(array('status_aktivasi'=>'Y'));
+		if(!empty($periode))
+			$criteria->compare('periode_id',$periode->id_periode);
+
+		$model = Peserta::model()->findAll($criteria);
 
 		$this->renderPartial('export',array(
 			'model' => $model,
@@ -682,9 +687,10 @@ class PesertaController extends Controller
 		// echo $maklumat;
 
 		$periode = Periode::model()->findByAttributes(array('status_aktivasi'=>'Y'));
+		$tgl_tutup = !empty($periode) ? $periode->tanggal_tutup : date('Y-m-d H:i:s');
 
 		$timenow = date('Y-m-d H:i:s');
-		$timebatas = date('Y-m-d H:i:s',strtotime($periode->tanggal_tutup));
+		$timebatas = date('Y-m-d H:i:s',strtotime($tgl_tutup));
 
 		$d1 = new DateTime($timenow);
 		$d2 = new DateTime($timebatas);

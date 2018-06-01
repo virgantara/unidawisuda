@@ -70,6 +70,12 @@ class PeriodeController extends Controller
 		if(isset($_POST['Periode']))
 		{
 			$model->attributes=$_POST['Periode'];
+			$models = Periode::model()->findAll();
+			foreach($models as $m)
+			{
+				$m->status_aktivasi = 'N';
+				$m->save(false,array('status_aktivasi'));
+			}
 			if($model->save())
 				$this->redirect(array('admin'));
 		}
@@ -93,6 +99,12 @@ class PeriodeController extends Controller
 
 		if(isset($_POST['Periode']))
 		{
+			$models = Periode::model()->findAll();
+			foreach($models as $m)
+			{
+				$m->status_aktivasi = 'N';
+				$m->save(false,array('status_aktivasi'));
+			}
 			$model->attributes=$_POST['Periode'];
 			if($model->save())
 				$this->redirect(array('admin'));
