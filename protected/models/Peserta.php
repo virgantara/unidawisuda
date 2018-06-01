@@ -206,6 +206,10 @@ class Peserta extends CActiveRecord
 		$criteria->compare('skripsi',$this->skripsi,true);
 		$criteria->compare('abstrak',$this->abstrak,true);
 
+
+		$periode = Periode::model()->findByAttributes(array('status_aktivasi'=>'Y'));
+		$criteria->compare('periode_id',$periode->id_periode);
+
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
