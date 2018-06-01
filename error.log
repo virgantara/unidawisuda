@@ -1,0 +1,4 @@
+[Wed May 16 18:07:19.147725 2018] [:error] [pid 8596] [client 36.74.100.252:54297] script '/var/www/unidawisuda/inex.php' not found or unable to stat
+[Thu May 31 13:17:20.366227 2018] [:error] [pid 11970] [client 128.199.81.128:20398] PHP Warning:  Unknown: POST Content-Length of 9606177 bytes exceeds the limit of 8388608 bytes in Unknown on line 0, referer: http://wisuda.unida.gontor.ac.id/index.php?r=peserta/create
+[Thu May 31 13:21:06.709325 2018] [:error] [pid 12040] [client 128.199.81.128:30810] PHP Warning:  Unknown: POST Content-Length of 9606177 bytes exceeds the limit of 8388608 bytes in Unknown on line 0, referer: http://wisuda.unida.gontor.ac.id/index.php?r=peserta/create
+[Thu May 31 13:24:17.586848 2018] [:error] [pid 12080] [client 128.199.81.128:33847] PHP Warning:  Unknown: POST Content-Length of 9606177 bytes exceeds the limit of 8388608 bytes in Unknown on line 0, referer: http://wisuda.unida.gontor.ac.id/index.php?r=peserta/create
