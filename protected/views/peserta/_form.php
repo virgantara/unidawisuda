@@ -738,7 +738,7 @@ array(
                'sizeLimit'=>1*1024*1024,// maximum file size in bytes
                'minSizeLimit'=>512,// minimum file size in bytes
                'onComplete'=>"js:function(id, fileName, responseJSON){ 
-               		$('#Peserta_bukti_revisi_bahasa').val(responseJSON.filename);
+               		$('#Peserta_bukti_layouter').val(responseJSON.filename);
                	 }",
                'messages'=>array(
                                 'typeError'=>"{file} has invalid extension. Only {extensions} are allowed.",
@@ -769,7 +769,7 @@ array(
                'sizeLimit'=>1*1024*1024,// maximum file size in bytes
                'minSizeLimit'=>512,// minimum file size in bytes
                'onComplete'=>"js:function(id, fileName, responseJSON){ 
-               		$('#Peserta_bukti_revisi_bahasa').val(responseJSON.filename);
+               		$('#Peserta_bukti_perpus').val(responseJSON.filename);
                	 }",
                'messages'=>array(
                                 'typeError'=>"{file} has invalid extension. Only {extensions} are allowed.",
