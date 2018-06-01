@@ -29,7 +29,7 @@ class PesertaController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','create','getProdi','setSessionNIM','uploadPasPhoto','uploadIjazah','uploadAkta','uploadKwitansiJilid','uploadSBP','uploadResume','uploadSBT','uploadTranskrip','uploadSKL','uploadKwitansiWisuda','uploadSuratJalan','uploadSkripsi','uploadAbstrak','export','uploadTandaKeluar',
-					'uploadBuktiRevisiBahasa','uploadBuktiLayouter','uploadBuktiPerpus'
+					'uploadBuktiRevisiBahasa','uploadBuktiLayouter','uploadBuktiPerpus','cek'
 			),
 				'users'=>array('*'),
 			),
@@ -45,6 +45,18 @@ class PesertaController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionCek()
+	{
+		$model=new Peserta('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Peserta']))
+			$model->attributes=$_GET['Peserta'];
+
+		$this->render('cek',array(
+			'model'=>$model,
+		));
 	}
 
 	public function actionUploadBuktiPerpus()
@@ -657,7 +669,7 @@ class PesertaController extends Controller
 		$settings = Setting::model()->findAll();
 
 		$maklumat = '';
-		$batasupload = '';
+		// $batasupload = '';
 		foreach($settings as $setting)
 		{
 		  if($setting->kode_setting == 'MAKLUMAT')
@@ -665,16 +677,14 @@ class PesertaController extends Controller
 		    $maklumat = $setting->konten;
 		  }
 
-		  else if($setting->kode_setting == 'BATASUPLOAD')
-		  {
-		    $batasupload = $setting->konten;
-		  }
+		  
 		}
 		// echo $maklumat;
 
+		$periode = Periode::model()->findByAttributes(array('status_aktivasi'=>'Y'));
 
 		$timenow = date('Y-m-d H:i:s');
-		$timebatas = date('Y-m-d H:i:s',strtotime($batasupload));
+		$timebatas = date('Y-m-d H:i:s',strtotime($periode->tanggal_tutup));
 
 		$d1 = new DateTime($timenow);
 		$d2 = new DateTime($timebatas);
@@ -689,7 +699,8 @@ class PesertaController extends Controller
 			if(isset($_POST['Peserta']))
 			{
 				$model->attributes=$_POST['Peserta'];
-	           
+	           	
+				$model->periode_id = $periode->id_periode;
 				if($model->save()){
 					Yii::app()->user->setFlash('success','Terima kasih telah mendaftar');
 					$this->redirect(array('peserta/index'));

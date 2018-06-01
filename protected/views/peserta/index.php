@@ -43,16 +43,14 @@ foreach($settings as $setting)
     $maklumat = $setting->konten;
   }
 
-  else if($setting->kode_setting == 'BATASUPLOAD')
-  {
-    $batasupload = $setting->konten;
-  }
+ 
 }
 echo $maklumat;
 
+$periode = Periode::model()->findByAttributes(array('status_aktivasi'=>'Y'));
 
 $timenow = date('Y-m-d H:i:s');
-$timebatas = date('Y-m-d H:i:s',strtotime($batasupload));
+$timebatas = date('Y-m-d H:i:s',strtotime($periode->tanggal_tutup));
 
 $d1 = new DateTime($timenow);
 $d2 = new DateTime($timebatas);

@@ -33,19 +33,48 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'tanggal_buka'); ?>
-		<?php echo $form->textField($model,'tanggal_buka'); ?>
+		
+		<?php 
+		 $this->widget('application.extensions.timepicker.EJuiDateTimePicker',array(
+                    'model'=>$model,
+                    'attribute'=>'tanggal_buka',
+                    'options'=>array(
+                       'showAnim'=>'slide',
+                        'showSecond'=>true,
+                        'timeFormat' => 'hh:mm:ss',
+                        'dateFormat'=>'yy-mm-dd',
+                        'changeMonth' => true,
+                        'changeYear' => true,
+                        
+                    ),
+        	));
+		?>
 		<?php echo $form->error($model,'tanggal_buka'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'tanggal_tutup'); ?>
-		<?php echo $form->textField($model,'tanggal_tutup'); ?>
+		<?php 
+		 $this->widget('application.extensions.timepicker.EJuiDateTimePicker',array(
+                    'model'=>$model,
+                    'attribute'=>'tanggal_tutup',
+                    'options'=>array(
+                       'showAnim'=>'slide',
+                        'showSecond'=>true,
+                        'timeFormat' => 'hh:mm:ss',
+                        'dateFormat'=>'yy-mm-dd',
+                        'changeMonth' => true,
+                        'changeYear' => true,
+                        
+                    ),
+        	));
+		?>
 		<?php echo $form->error($model,'tanggal_tutup'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'status_aktivasi'); ?>
-		<?php echo $form->textField($model,'status_aktivasi'); ?>
+		<?php echo $form->dropDownList($model,'status_aktivasi',array('Y'=>'Buka','N'=>'Tutup')); ?>
 		<?php echo $form->error($model,'status_aktivasi'); ?>
 	</div>
 
