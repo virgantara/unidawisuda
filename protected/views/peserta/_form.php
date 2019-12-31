@@ -264,10 +264,22 @@ $kode_unik = Yii::app()->helper->generateUniqueCode(6);
 		
 		<tr>
 			<td colspan="2">
-				<?php echo $form->labelEx($model,'drive_path'); ?>
-				<small>
-			<p>Silakan unggah semua persyaratan di Google Drive masing-masing. Kemudian, salin tautan folder tersebut dan tempel di kotak Alamat share link Google Drive berikut:
-			<a target="_blank" href="https://www.youtube.com/watch?v=HUX61hqxTBw">Tutorial share Google Drive</a></p></small>
+				<h3>Hal-hal yang perlu diperhatikan</h3>
+				<h4>
+			<p>Silakan unggah semua persyaratan di Google Drive masing-masing dengan mengikuti petunjuk berikut:
+			<ol>
+				<li>Buat Folder baru di Google Drive Anda</li>
+				<li>Silakan unggah file persyarata wisuda dengan format NIM_jenis_file_persyaratan. Contoh: 372016xxxxxx_pas_foto.jpg atau 372016xxxxxx_bukti_layout.pdf</li>
+				<li>Klik kanan folder yang Anda buat tadi, klik Share</li>
+				<li>Klik Advanced pada pojok kanan bawah</li>
+				<li>Pada bagian Who can access klik Change, pilih Anyone with the link</li>
+				<li>Pada bagian Access, pilih Can view only</li>
+				<li>Klik Save</li>
+				<li>Kemudian, salin tautan folder tersebut dan tempel di kotak Alamat share link Google Drive berikut:</li>
+				<li>Jika kurang jelas, bisa melihat tutorial <a target="_blank" href="https://www.youtube.com/watch?v=HUX61hqxTBw">ini.</a></li>
+			</ol>
+			</p></h4>
+			<?php echo $form->labelEx($model,'drive_path'); ?>
 		<?php echo $form->textArea($model,'drive_path',['rows'=>5,'cols'=>50]); ?><br>
 
 		<?php echo $form->error($model,'drive_path'); ?>
