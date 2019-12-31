@@ -14,8 +14,6 @@ protected/config/main.php
 *.sql
 *.csv
 
-*.png
-*.jpg
 *.doc
 *.pdf
 
