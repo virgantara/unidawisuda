@@ -53,14 +53,15 @@ class Peserta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nim, nama_lengkap, fakultas, prodi, tempat_lahir, tanggal_lahir, jenis_kelamin, status_warga, warga_negara, alamat, no_telp, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu, pas_photo, ijazah, akta_kelahiran, resume_skripsi, abstrak, kampus, kmi, bukti_revisi_bahasa, bukti_perpus,bukti_layouter', 'required'),
+			// array('nim, nama_lengkap, fakultas, prodi, tempat_lahir, tanggal_lahir, jenis_kelamin, status_warga, warga_negara, alamat, no_telp, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu, pas_photo, ijazah, akta_kelahiran, resume_skripsi, abstrak, kampus, kmi, bukti_revisi_bahasa, bukti_perpus,bukti_layouter', 'required'),
+			array('nim, nama_lengkap, fakultas, prodi, tempat_lahir, tanggal_lahir, jenis_kelamin, status_warga, warga_negara, alamat, no_telp, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu,  kampus, kmi,drive_path, kode_pendaftaran', 'required'),
 			array('nim', 'length', 'max'=>50),
 			array('nim', 'numerical', 'integerOnly'=>true),
 			array('nim','unique'),
 			array('nama_lengkap', 'length', 'max'=>255),
-			array('tanda_keluar_asrama','cekTanda'),
-			array('surat_jalan','cekSuratJalan'),
-			array('surat_bebas_tunggakan','cekKmi'),
+			// array('tanda_keluar_asrama','cekTanda'),
+			// array('surat_jalan','cekSuratJalan'),
+			// array('surat_bebas_tunggakan','cekKmi'),
 			array('fakultas, prodi, tempat_lahir, tanggal_lahir, jenis_kelamin, status_warga, warga_negara, no_telp, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu', 'length', 'max'=>100),
 			// array('ijazah, akta_kelahiran, kwitansi_jilid, resume_skripsi, surat_bebas_tunggakan, transkrip, skl_tahfidz, kwitansi_wisuda, tanda_keluar_asrama, surat_jalan, skripsi, abstrak', 'file', 'types' => 'jpg, gif, png, pdf, doc, docx', 'allowEmpty' => true, 'maxSize' => 1024 * 1024 * 10, 'tooLarge' => 'The file was larger than 10MB. Please upload a smaller file.'),
 			// array('pas_photo', 'file', 'types' => 'png, jpg', 'allowEmpty' => true, 'maxSize' => 1024 * 1024, 'tooLarge' => 'The file was larger than 1MB. Please upload a smaller file.'),
@@ -124,7 +125,8 @@ class Peserta extends CActiveRecord
 			'bukti_revisi_bahasa' => 'Bukti Revisi Bahasa dan Naskah Jurnal (Receipt 1)', 
 			'bukti_layouter' => 'Bukti Serah Terima Layouter (Receipt 2)', 
 			'bukti_perpus' => 'Bukti Perpustakaan (Receipt 3)',
-			'periode_id' => 'Periode'
+			'periode_id' => 'Periode',
+			'drive_path' => 'Alamat share link Google Drive'
 		);
 	}
 

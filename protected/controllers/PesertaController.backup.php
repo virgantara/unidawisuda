@@ -699,6 +699,21 @@ class PesertaController extends Controller
 		if($d1 <= $d2)
 		{
 
+			$url = "/f/list";
+			$params = [];
+				
+			$result = Yii::app()->rest->getDataApi($url,$params);
+
+
+			$list_fakultas = [];
+			if(!empty($result->values))
+			{
+				foreach($result->values as $f)
+				{
+					$list_fakultas[$f->kode_fakultas] = $f->nama_fakultas;
+				}
+			}
+
 			$model=new Peserta;
 
 			// Uncomment the following line if AJAX validation is needed
@@ -711,7 +726,7 @@ class PesertaController extends Controller
 				$model->periode_id = $periode->id_periode;
 				$model->nim = trim($model->nim);
 				if($model->save()){
-					Yii::app()->user->setFlash('success','Terima kasih telah mendaftar. Kode Bukti Pendaftaran Anda: '.$model->kode_pendaftaran);
+					Yii::app()->user->setFlash('success','Terima kasih telah mendaftar');
 					$this->redirect(array('peserta/index'));
 				}
 			}
@@ -720,7 +735,7 @@ class PesertaController extends Controller
 
 			$this->render('create',array(
 				'model'=>$model,
-				// 'list_fakultas' => $list_fakultas
+				'list_fakultas' => $list_fakultas
 			));
 		}
 

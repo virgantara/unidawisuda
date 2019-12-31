@@ -17,5 +17,5 @@ $this->breadcrumbs=array(
 
 <?php $this->renderPartial('_form', array(
 	'model'=>$model,
-	'list_fakultas' => $list_fakultas
+	// 'list_fakultas' => $list_fakultas
 	)); ?>
