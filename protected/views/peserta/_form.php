@@ -306,9 +306,12 @@ $this->endWidget('zii.widgets.jui.CJuiDialog');
 <script type="text/javascript">
 
 $(document).on('keypress','#Peserta_nim',function(e){
-	e.preventDefault();
+	
 
-	if(e.which == 13){
+	var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
+    
+    if (e.keyCode == 13) {
+    
 		$.ajax({
 			type : 'POST',
 			url : '<?=Yii::app()->createUrl('AjaxRequest/GetProfilMhs');?>',
