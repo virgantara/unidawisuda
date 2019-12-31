@@ -34,6 +34,30 @@ class MyRest extends CApplicationComponent
 		
 		return $hasil;
 	} 
+
+	public static function postDataApi($url, $params)
+	{
+		$host = Yii::app()->rest->baseurl_apigateway;
+
+		$url = $host.$url;
+		$api = new RestClient;
+		
+		$headers = [];
+		$result = $api->post($url, $params, $headers);		
+		try{
+			$hasil = $result->decode_response();
+			
+		}
+
+		catch(RestClientException  $e){
+			
+    		
+			// throw new RestClientException;
+			$hasil = null;
+		}
+		
+		return $hasil;
+	} 
 	
 /*
 =========================HEADER WS================================================

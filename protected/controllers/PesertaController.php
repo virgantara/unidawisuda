@@ -55,8 +55,17 @@ class PesertaController extends Controller
 		// $this->performAjaxValidation($model);
 
 		$model->status_validasi='VALID';
-		if($model->save(false,'status_validasi'))
+		if($model->save(false,'status_validasi')){
+			$url = "/m/wisuda/eligible";
+			$q = $model->nim;
+			$params = [
+				'nim' => $q,
+				'is_eligible' => 1
+			];
+				
+			$result = Yii::app()->rest->postDataApi($url,$params);
 			$this->redirect(array('view','id'=>$model->id));
+		}
 	}
 
 	public function actionBatalValidasiData($id)
@@ -67,8 +76,17 @@ class PesertaController extends Controller
 		// $this->performAjaxValidation($model);
 
 		$model->status_validasi='TIDAK VALID';
-		if($model->save(false,'status_validasi'))
+		if($model->save(false,'status_validasi')){
+			$url = "/m/wisuda/eligible";
+			$q = $model->nim;
+			$params = [
+				'nim' => $q,
+				'is_eligible' => 0
+			];
+				
+			$result = Yii::app()->rest->postDataApi($url,$params);
 			$this->redirect(array('view','id'=>$model->id));
+		}
 	}
 
 	public function actionCek()
