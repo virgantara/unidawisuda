@@ -18,9 +18,17 @@ $this->menu=array(
 
 <h1>View Peserta #<?php echo $model->id; ?></h1>
 
+<p><button id="btn-validate" class="btn">Validasi Data</button></p>
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
+		 array(
+		 	'label'=>'Status Eligible',
+            'type'=>'raw',
+        	'value'=>function($data){
+        		return $data->status_validasi == 'VALID' ? '<div style="background-color:green;color:white;padding:3px 3px 3px 3px">ELIGIBLE untuk WISUDA</div>' : '<div style="background-color:red;color:white;padding:3px 3px 3px 3px">BELUM BERHAK WISUDA</div>';
+        	}
+        ),   
 		'kmi',
 		'kampus',
 		'nim',
@@ -124,5 +132,48 @@ $this->menu=array(
             'type'=>'raw',
         	'value'=>CHtml::link(CHtml::encode($model->bukti_perpus), Yii::app()->baseUrl.'/uploads/bukti_layouter/'.$model->bukti_perpus)
         ),   
+         array(
+		 	'label'=>'Link Google Drive',
+            'type'=>'raw',
+        	'value'=>CHtml::link('link ke GDrive',CHtml::encode($model->drive_path ?: '#'))
+        ),   
+
+         
 	),
 )); ?>
+
+<?php 
+$this->beginWidget('zii.widgets.jui.CJuiDialog',array(
+    'id'=>'dialog',
+    // additional javascript options for the dialog plugin
+    'options'=>array(
+        'title'=>'Konfirmasi',
+        'autoOpen'=>false,
+    ),
+));
+
+?>
+<p>Validasi Data Ini</p>
+<input type="button" id="simpan" value="Ok"/>
+<input type="button" id="batal" value="Batal"/>
+<?php
+$this->endWidget('zii.widgets.jui.CJuiDialog');
+?>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#btn-validate').click(function(e){
+	    	
+	    	$('#dialog').dialog("open");
+	    });
+
+	    $('#simpan').click(function(e){
+	    	window.location = '<?=Yii::app()->createUrl('peserta/validasiData',['id'=>$model->id]);?>';
+	    });
+
+	    $('#batal').click(function(e){
+	    	window.location = '<?=Yii::app()->createUrl('peserta/batalValidasiData',['id'=>$model->id]);?>';
+	    });
+
+	});
+</script>

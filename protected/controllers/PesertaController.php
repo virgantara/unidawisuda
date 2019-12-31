@@ -29,7 +29,7 @@ class PesertaController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','create','getProdi','setSessionNIM','uploadPasPhoto','uploadIjazah','uploadAkta','uploadKwitansiJilid','uploadSBP','uploadResume','uploadSBT','uploadTranskrip','uploadSKL','uploadKwitansiWisuda','uploadSuratJalan','uploadSkripsi','uploadAbstrak','export','uploadTandaKeluar',
-					'uploadBuktiRevisiBahasa','uploadBuktiLayouter','uploadBuktiPerpus','cek'
+					'uploadBuktiRevisiBahasa','uploadBuktiLayouter','uploadBuktiPerpus','cek','validasiData','batalValidasiData'
 			),
 				'users'=>array('*'),
 			),
@@ -45,6 +45,30 @@ class PesertaController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionValidasiData($id)
+	{
+		$model=$this->loadModel($id);
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		$model->status_validasi='VALID';
+		if($model->save(false,'status_validasi'))
+			$this->redirect(array('view','id'=>$model->id));
+	}
+
+	public function actionBatalValidasiData($id)
+	{
+		$model=$this->loadModel($id);
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		$model->status_validasi='TIDAK VALID';
+		if($model->save(false,'status_validasi'))
+			$this->redirect(array('view','id'=>$model->id));
 	}
 
 	public function actionCek()
