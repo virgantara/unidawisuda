@@ -8,7 +8,7 @@ database.php
 
 uploads/*
 uploads/*/*
-
+protected/config/main.php
 *.zip
 
 *.sql
@@ -18,3 +18,4 @@ uploads/*/*
 *.jpg
 *.doc
 *.pdf
+

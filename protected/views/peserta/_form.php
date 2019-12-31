@@ -7,12 +7,12 @@ if(empty($model->nim))
 /* @var $form CActiveForm */
 
 $listkampus = array(
-		'Siman' => 'Siman',
-		'Gontor' => 'Gontor',
-		'Mantingan' => 'Mantingan',
-		'Kediri' => 'Kediri',
-		'Kandangan' => 'Kandangan',
-		'Magelang' => 'Magelang'
+		'1' => 'Siman',
+		'2' => 'Gontor',
+		'3' => 'Mantingan',
+		'4' => 'Kediri',
+		'5' => 'Kandangan',
+		'6' => 'Magelang'
 	);
 
 $listkmi = array(
@@ -71,30 +71,30 @@ $listkmi = array(
 	      $('#Peserta_tanggal_lahir').val(y+'-'+m+'-'+d);      
 	    });
 
-	    $('#Peserta_fakultas').change(function(){
-	    	$.ajax({
-	    		url : '<?php echo Yii::app()->createUrl('peserta/getProdi');?>',
-	    		type : 'POST',
-	    		data : 'nama='+$(this).val(),
-	    		beforeSend : function(){
-	    			$('#loading').show();
-	    		},
-	    		success : function(data){
-	    			$('#loading').hide();
-	    			var hasil = JSON.parse(data);
-	    			$('#Peserta_prodi').empty();
-	    			var row = '';
-	    			$.each(hasil, function(index,item){
-	    				 $('#Peserta_prodi').append($('<option>', { 
-					        value: item.nama,
-					        text : item.nama 
-					    }));
+	    // $('#Peserta_fakultas').change(function(){
+	    // 	$.ajax({
+	    // 		url : '<?php echo Yii::app()->createUrl('peserta/getProdi');?>',
+	    // 		type : 'POST',
+	    // 		data : 'nama='+$(this).val(),
+	    // 		beforeSend : function(){
+	    // 			$('#loading').show();
+	    // 		},
+	    // 		success : function(data){
+	    // 			$('#loading').hide();
+	    // 			var hasil = JSON.parse(data);
+	    // 			$('#Peserta_prodi').empty();
+	    // 			var row = '';
+	    // 			$.each(hasil, function(index,item){
+	    // 				 $('#Peserta_prodi').append($('<option>', { 
+					//         value: item.nama,
+					//         text : item.nama 
+					//     }));
 	    				
-	    			});
+	    // 			});
 
-	    		}
-	    	});
-	    });
+	    // 		}
+	    // 	});
+	    // });
 
 	    $('#Peserta_nim').focusout(function(){
 	    	$.ajax({
@@ -140,8 +140,17 @@ $kode_unik = Yii::app()->helper->generateUniqueCode(6);
 	</div>
 	<table>
 		<tr>
+			<td>	<?php echo $form->labelEx($model,'nim'); ?>
+		<?php echo $form->textField($model,'nim'); ?>
+		<?php echo $form->error($model,'nim'); ?></td>
+			<td><?php echo $form->labelEx($model,'nama_lengkap'); ?>
+		<?php echo $form->textField($model,'nama_lengkap',['readonly'=>'readonly']); ?>
+		<?php echo $form->error($model,'nama_lengkap'); ?></td>
+		</tr>
+		<tr>
 			<td colspan="2">	<?php echo $form->labelEx($model,'kampus'); ?>
-		<?php echo $form->dropDownList($model,'kampus',$listkampus,array('empty'=>'- Pilih Kampus -')); ?>
+		<?php 
+		echo $form->textField($model,'kampus',['readonly'=>'readonly']); ?>
 		<?php echo $form->error($model,'kampus'); ?></td>
 		</tr>
 		<tr>
@@ -149,22 +158,14 @@ $kode_unik = Yii::app()->helper->generateUniqueCode(6);
 		<?php echo $form->dropDownList($model,'kmi',$listkmi,array('empty'=>'- Pilih Item -')); ?>
 		<?php echo $form->error($model,'kmi'); ?></td>
 		</tr>
-		<tr>
-			<td>	<?php echo $form->labelEx($model,'nim'); ?>
-		<?php echo $form->textField($model,'nim',array('size'=>50,'maxlength'=>50)); ?>
-		<?php echo $form->error($model,'nim'); ?></td>
-			<td><?php echo $form->labelEx($model,'nama_lengkap'); ?>
-		<?php echo $form->textField($model,'nama_lengkap',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'nama_lengkap'); ?></td>
-		</tr>
+		
 		<tr>
 			<td>
 			<?php echo $form->labelEx($model,'fakultas'); ?>
 		<?php 
 		
-		$list = CHtml::listData(Fakultas::model()->findAll(),'nama_fakultas','nama_fakultas');
-		echo $form->dropDownList($model,'fakultas',$list,array(
-        'empty'=>'--Pilih Fakultas--')); 
+		// $list = CHtml::listData(Fakultas::model()->findAll(),'nama_fakultas','nama_fakultas');
+		echo $form->textField($model,'fakultas',['readonly'=>'readonly']); 
 		?>
 		<?php echo $form->error($model,'fakultas'); ?>
 		</td>
@@ -173,7 +174,7 @@ $kode_unik = Yii::app()->helper->generateUniqueCode(6);
 
 		<?php 
 		$list = array();
-		echo $form->dropDownList($model,'prodi',$list); 
+		echo $form->textField($model,'prodi',['readonly'=>'readonly']); 
 
 		?>
 		<img id="loading" style="display: none" src="<?php echo Yii::app()->baseUrl;?>/images/loading.gif"/>
@@ -183,15 +184,12 @@ $kode_unik = Yii::app()->helper->generateUniqueCode(6);
 		<tr>
 			<td>
 			<?php echo $form->labelEx($model,'tempat_lahir'); ?>
-		<?php echo $form->textField($model,'tempat_lahir',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->textField($model,'tempat_lahir',['readonly'=>'readonly']); ?>
 		<?php echo $form->error($model,'tempat_lahir'); ?>
 		</td>
 			<td>
 			<?php echo $form->labelEx($model,'tanggal_lahir'); ?>
-			<select id="dobday" class="form-control"></select>
-			<select id="dobmonth" class="form-control"></select>
-			<select id="dobyear" class="form-control"></select>
-		<?php echo $form->hiddenField($model,'tanggal_lahir',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->textField($model,'tanggal_lahir',['readonly'=>'readonly']); ?>
 		<?php echo $form->error($model,'tanggal_lahir'); ?>
 		</td>
 		</tr>
@@ -200,11 +198,7 @@ $kode_unik = Yii::app()->helper->generateUniqueCode(6);
 				<?php echo $form->labelEx($model,'jenis_kelamin'); ?>
 		<?php 
 		
-		$jklist = array(
-				'Laki-laki' => 'Laki-laki',
-				'Perempuan' => 'Perempuan'
-			);
-		echo $form->dropDownList($model,'jenis_kelamin',$jklist); 
+		echo $form->textField($model,'jenis_kelamin',['readonly'=>'readonly']); 
 		?>
 		<?php echo $form->error($model,'jenis_kelamin'); ?>
 		</td>
@@ -215,50 +209,50 @@ $kode_unik = Yii::app()->helper->generateUniqueCode(6);
 		<tr>
 			<td>
 				<?php echo $form->labelEx($model,'status_warga'); ?>
-		<?php echo $form->textField($model,'status_warga',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->textField($model,'status_warga',['readonly'=>'readonly']); ?>
 		<?php echo $form->error($model,'status_warga'); ?>
 		</td>
 			<td>
 			<?php echo $form->labelEx($model,'warga_negara'); ?>
-		<?php echo $form->textField($model,'warga_negara',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->textField($model,'warga_negara',['readonly'=>'readonly']); ?>
 		<?php echo $form->error($model,'warga_negara'); ?>
 		</td>
 		</tr>
 		<tr>
 			<td colspan="2">
 			<?php echo $form->labelEx($model,'alamat'); ?>
-		<?php echo $form->textArea($model,'alamat',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->textArea($model,'alamat',['readonly'=>'readonly']); ?>
 		<?php echo $form->error($model,'alamat'); ?>
 		</td>
 		</tr>
 		<tr>
 			<td colspan="2">
 			<?php echo $form->labelEx($model,'no_telp'); ?>
-		<?php echo $form->textField($model,'no_telp',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->textField($model,'no_telp',['readonly'=>'readonly']); ?>
 		<?php echo $form->error($model,'no_telp'); ?>
 		</td>
 		</tr>
 		<tr>
 			<td>
 				<?php echo $form->labelEx($model,'nama_ayah'); ?>
-		<?php echo $form->textField($model,'nama_ayah',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->textField($model,'nama_ayah',['readonly'=>'readonly']); ?>
 		<?php echo $form->error($model,'nama_ayah'); ?>
 		</td>
 			<td>
 			<?php echo $form->labelEx($model,'pekerjaan_ayah'); ?>
-		<?php echo $form->textField($model,'pekerjaan_ayah',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->textField($model,'pekerjaan_ayah',['readonly'=>'readonly']); ?>
 		<?php echo $form->error($model,'pekerjaan_ayah'); ?>
 		</td>
 		</tr>
 		<tr>
 			<td>
 				<?php echo $form->labelEx($model,'nama_ibu'); ?>
-		<?php echo $form->textField($model,'nama_ibu',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->textField($model,'nama_ibu',['readonly'=>'readonly']); ?>
 		<?php echo $form->error($model,'nama_ibu'); ?>
 		</td>
 			<td>
 			<?php echo $form->labelEx($model,'pekerjaan_ibu'); ?>
-		<?php echo $form->textField($model,'pekerjaan_ibu',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->textField($model,'pekerjaan_ibu',['readonly'=>'readonly']); ?>
 		<?php echo $form->error($model,'pekerjaan_ibu'); ?>
 		</td>
 		</tr>
@@ -813,3 +807,51 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
 <?php
 $this->endWidget('zii.widgets.jui.CJuiDialog');
 ?>
+<script type="text/javascript">
+
+$(document).on('keypress','#Peserta_nim',function(e){
+	e.preventDefault();
+
+	if(e.which == 13){
+		$.ajax({
+			type : 'POST',
+			url : '<?=Yii::app()->createUrl('AjaxRequest/GetProfilMhs');?>',
+			data : 'nim='+$(this).val(),
+			error: function(e){
+				console.log(e.responseText);
+			},
+			beforeSend : function(){
+
+			},
+			success : function(data){
+				var hasil = $.parseJSON(data);
+				$('#Peserta_nama_lengkap').val(hasil.mhs.nama_mahasiswa);
+				$('#Peserta_kampus').val(hasil.mhs.nama_kampus);
+				$('#Peserta_fakultas').val(hasil.mhs.nama_fakultas);
+				$('#Peserta_prodi').val(hasil.mhs.nama_prodi);
+				$('#Peserta_tempat_lahir').val(hasil.mhs.tempat_lahir);
+				$('#Peserta_tanggal_lahir').val(hasil.mhs.tgl_lahir);
+				$('#Peserta_jenis_kelamin').val(hasil.mhs.jenis_kelamin);
+				$('#Peserta_no_telp').val(hasil.mhs.telepon);
+				$('#Peserta_status_warga').val(hasil.mhs.sw);
+				$('#Peserta_warga_negara').val(hasil.mhs.wn);
+				var alamat = hasil.mhs.alamat + ' ' +hasil.mhs.desa  + ' ' +hasil.mhs.kecamatan  + ' ' +hasil.mhs.kab  + ' ' +hasil.mhs.prov 
+				$('#Peserta_alamat').val(alamat);
+
+				$.each(hasil.ortu,function(i,obj){
+					if(obj.hub == 'IBU'){
+						$('#Peserta_nama_ibu').val(obj.nm);
+						$('#Peserta_pekerjaan_ibu').val(obj.label);						
+					}
+
+					else if(obj.hub == 'AYAH'){
+						$('#Peserta_nama_ayah').val(obj.nm);
+						$('#Peserta_pekerjaan_ayah').val(obj.label);						
+					}
+				});
+			}
+
+		});
+	}
+});
+</script>

@@ -37,7 +37,11 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
-
+		'rest' => array(
+			'class' => 'application.extensions.rest.MyRest',
+			'baseurl_apigateway' => 'http://localhost:1988',
+			
+		),
 		'helper' => array(
 			'class' => 'application.extensions.helper.MyHelper'
 		),

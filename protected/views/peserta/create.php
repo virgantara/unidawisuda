@@ -15,4 +15,7 @@ $this->breadcrumbs=array(
 
 <h1>Pendaftaran Peserta WISUDA</h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array(
+	'model'=>$model,
+	'list_fakultas' => $list_fakultas
+	)); ?>

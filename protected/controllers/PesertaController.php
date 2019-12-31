@@ -686,6 +686,7 @@ class PesertaController extends Controller
 		}
 		// echo $maklumat;
 
+
 		$periode = Periode::model()->findByAttributes(array('status_aktivasi'=>'Y'));
 		$tgl_tutup = !empty($periode) ? $periode->tanggal_tutup : date('Y-m-d H:i:s');
 
@@ -697,6 +698,22 @@ class PesertaController extends Controller
 
 		if($d1 <= $d2)
 		{
+
+			$url = "/f/list";
+			$params = [];
+				
+			$result = Yii::app()->rest->getDataApi($url,$params);
+
+
+			$list_fakultas = [];
+			if(!empty($result->values))
+			{
+				foreach($result->values as $f)
+				{
+					$list_fakultas[$f->kode_fakultas] = $f->nama_fakultas;
+				}
+			}
+
 			$model=new Peserta;
 
 			// Uncomment the following line if AJAX validation is needed
@@ -707,14 +724,18 @@ class PesertaController extends Controller
 				$model->attributes=$_POST['Peserta'];
 	           	
 				$model->periode_id = $periode->id_periode;
+				$model->nim = trim($model->nim);
 				if($model->save()){
 					Yii::app()->user->setFlash('success','Terima kasih telah mendaftar');
 					$this->redirect(array('peserta/index'));
 				}
 			}
 
+
+
 			$this->render('create',array(
 				'model'=>$model,
+				'list_fakultas' => $list_fakultas
 			));
 		}
 
