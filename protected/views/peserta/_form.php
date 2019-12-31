@@ -143,7 +143,7 @@ $kode_unik = Yii::app()->helper->generateUniqueCode(6);
 			<td>	<?php echo $form->labelEx($model,'nim'); ?>
 		<p>
 		<?php echo $form->textField($model,'nim'); ?><br>
-		<small>Ketik NIM Anda. Jika sudah, tekan Enter</small>
+		<small>Ketik NIM Anda. Jika sudah, tekan Ctrl + Enter</small>
 	</p>
 		<?php echo $form->error($model,'nim'); ?></td>
 			<td><p><?php echo $form->labelEx($model,'nama_lengkap'); ?>
@@ -305,13 +305,13 @@ $this->endWidget('zii.widgets.jui.CJuiDialog');
 ?>
 <script type="text/javascript">
 
-$(document).on('keypress','#Peserta_nim',function(e){
+$(document).on('keydown','#Peserta_nim',function(e){
 	
 
 	var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
     
-    if (e.keyCode == 13) {
-    
+    if (e.ctrlKey && e.keyCode == 13) {
+    	e.preventDefault();
 		$.ajax({
 			type : 'POST',
 			url : '<?=Yii::app()->createUrl('AjaxRequest/GetProfilMhs');?>',
@@ -351,6 +351,10 @@ $(document).on('keypress','#Peserta_nim',function(e){
 			}
 
 		});
+	}
+
+	else if(e.keyCode == 13){
+		e.preventDefault();
 	}
 });
 </script>
