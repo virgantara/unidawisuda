@@ -40,7 +40,7 @@ return array(
 		'rest' => array(
 			'class' => 'application.extensions.rest.MyRest',
 			'baseurl_apigateway' => 'http://localhost:1988',
-			
+			'token' => 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6IjE5MjYyMDE0IiwiY2xpZW50U2VjcmV0IjoiYmlzbWlsbGFoIiwiaWF0IjoxNTc5MTY2NDc3fQ.T5xuFl750KDGyblYBGDPpZ-fl4UDcOq4Rc6TWxux1VE',
 		),
 		'helper' => array(
 			'class' => 'application.extensions.helper.MyHelper'
