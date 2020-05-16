@@ -342,6 +342,11 @@ $(document).on('keydown','#Peserta_nim',function(e){
 					alert('Oops, data Anda tidak ditemukan di sistem kami.');
 				}
 
+				else if(!hasil.ortu)
+				{
+					alert('Oops, data orang tua Anda tidak ditemukan di sistem kami.');	
+				}
+
 				else
 				{
 					$('#Peserta_nama_lengkap').val(hasil.mhs.nama_mahasiswa);
