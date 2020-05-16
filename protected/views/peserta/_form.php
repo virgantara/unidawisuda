@@ -336,30 +336,41 @@ $(document).on('keydown','#Peserta_nim',function(e){
 			},
 			success : function(data){
 				var hasil = $.parseJSON(data);
-				$('#Peserta_nama_lengkap').val(hasil.mhs.nama_mahasiswa);
-				$('#Peserta_kampus').val(hasil.mhs.nama_kampus);
-				$('#Peserta_fakultas').val(hasil.mhs.nama_fakultas);
-				$('#Peserta_prodi').val(hasil.mhs.nama_prodi);
-				$('#Peserta_tempat_lahir').val(hasil.mhs.tempat_lahir);
-				$('#Peserta_tanggal_lahir').val(hasil.mhs.tgl_lahir);
-				$('#Peserta_jenis_kelamin').val(hasil.mhs.jenis_kelamin);
-				$('#Peserta_no_telp').val(hasil.mhs.telepon);
-				$('#Peserta_status_warga').val(hasil.mhs.sw);
-				$('#Peserta_warga_negara').val(hasil.mhs.wn);
-				var alamat = hasil.mhs.alamat + ' ' +hasil.mhs.desa  + ' ' +hasil.mhs.kecamatan  + ' ' +hasil.mhs.kab  + ' ' +hasil.mhs.prov 
-				$('#Peserta_alamat').val(alamat);
 
-				$.each(hasil.ortu,function(i,obj){
-					if(obj.hub == 'IBU'){
-						$('#Peserta_nama_ibu').val(obj.nm);
-						$('#Peserta_pekerjaan_ibu').val(obj.label);						
-					}
+				if(!hasil.mhs)
+				{
+					alert('Oops, data Anda tidak ditemukan di sistem kami.');
+				}
 
-					else if(obj.hub == 'AYAH'){
-						$('#Peserta_nama_ayah').val(obj.nm);
-						$('#Peserta_pekerjaan_ayah').val(obj.label);						
-					}
-				});
+				else
+				{
+					$('#Peserta_nama_lengkap').val(hasil.mhs.nama_mahasiswa);
+					$('#Peserta_kampus').val(hasil.mhs.nama_kampus);
+					$('#Peserta_fakultas').val(hasil.mhs.nama_fakultas);
+					$('#Peserta_prodi').val(hasil.mhs.nama_prodi);
+					$('#Peserta_tempat_lahir').val(hasil.mhs.tempat_lahir);
+					$('#Peserta_tanggal_lahir').val(hasil.mhs.tgl_lahir);
+					$('#Peserta_jenis_kelamin').val(hasil.mhs.jenis_kelamin);
+					$('#Peserta_no_telp').val(hasil.mhs.telepon);
+					$('#Peserta_status_warga').val(hasil.mhs.sw);
+					$('#Peserta_warga_negara').val(hasil.mhs.wn);
+					var alamat = hasil.mhs.alamat + ' ' +hasil.mhs.desa  + ' ' +hasil.mhs.kecamatan  + ' ' +hasil.mhs.kab  + ' ' +hasil.mhs.prov 
+					$('#Peserta_alamat').val(alamat);
+
+					$.each(hasil.ortu,function(i,obj){
+						if(obj.hub == 'IBU'){
+							$('#Peserta_nama_ibu').val(obj.nm);
+							$('#Peserta_pekerjaan_ibu').val(obj.label);						
+						}
+
+						else if(obj.hub == 'AYAH'){
+							$('#Peserta_nama_ayah').val(obj.nm);
+							$('#Peserta_pekerjaan_ayah').val(obj.label);						
+						}
+					});
+				}
+
+				
 			}
 
 		});
