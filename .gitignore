@@ -17,3 +17,5 @@ protected/config/main.php
 *.doc
 *.pdf
 
+
+/vendor/

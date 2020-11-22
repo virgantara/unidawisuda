@@ -1,5 +1,7 @@
 <?php
 
+use \Firebase\JWT\JWT;
+
 class SiteController extends Controller
 {
 	/**
@@ -20,6 +22,56 @@ class SiteController extends Controller
 			),
 		);
 	}
+
+	public function actionLoginSso($token)
+    {
+    	
+        $key = Yii::app()->params->jwt_key;
+        $decoded = JWT::decode($token, base64_decode(strtr($key, '-_', '+/')), ['HS256']);
+        // print_r($decoded);exit;
+        $session = Yii::app()->session;
+        $session->add('token',$token);
+        $uuid = $decoded->uuid; // will print "1"
+        $model=new User();
+		$model->uuid=$uuid;
+		$user = User::model()->findByAttributes(array('uuid' => $model->uuid));
+		
+		if(empty($user))
+		{
+			Yii::app()->user->setFlash('danger', "Tidak ada user dengan email ini");
+			$this->redirect(Yii::app()->params->sso_login);
+		}
+
+		$model->USERNAME = $user->USERNAME;
+		$model->PASSWORD = '123';
+
+		$result = $model->login();
+		
+		switch($result)
+		{
+			case UserIdentity::ERROR_NONE:
+				
+				$this->redirect(array('site/index'));
+				
+				break;
+			case UserIdentity::ERROR_USERNAME_INVALID:
+			case UserIdentity::ERROR_PASSWORD_INVALID:
+				$this->redirect(Yii::app()->params->sso_login);
+				
+				break;
+			case UserIdentity::ERROR_USER_INACTIVE:
+
+				$this->redirect(Yii::app()->params->sso_login);
+				
+				break;
+			case UserIdentity::ERROR_USER_NOT_EXIST:
+
+				$this->redirect(Yii::app()->params->sso_login);
+				
+				break;
+		}
+		
+    }
 
 	/**
 	 * This is the default 'index' action that is invoked
@@ -94,9 +146,13 @@ class SiteController extends Controller
 	}
 
 	public function actionLogout()
-	{
+	{	
+		$session = Yii::app()->session;
+		$session->remove('access_token','');
+		$session->remove('uuid','');
+		$session->destroy();
 		Yii::app()->user->logout();
-		$this->redirect(array('site/login'));
+		$this->redirect(Yii::app()->params->sso_logout);
 	}
 	
 }

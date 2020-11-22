@@ -9,6 +9,15 @@ class UserIdentity extends CUserIdentity
 {
 
 	const ERROR_USER_INACTIVE = 3;
+	const ERROR_USER_NOT_EXIST = 404;
+	public $uuid;
+
+	public function __construct($username, $password, $uuid='')
+    {
+        parent::__construct($username, $password);
+        $this->uuid = $uuid;
+    }
+
 	/**
 	 * Authenticates a user.
 	 * The example implementation makes sure if the username and password
@@ -19,20 +28,15 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function authenticate()
 	{
-		$user = User::model()->findByPk($this->username);
-		
+		$user = User::model()->findByAttributes(array('uuid' => $this->uuid));
+		// print_r($this->uuid);exit;
 		if(is_null($user))
 		{
 
-			$this->errorCode=self::ERROR_USERNAME_INVALID;
+			$this->errorCode=self::ERROR_USER_NOT_EXIST;
 
 		}
-		else if($user->PASSWORD!==$this->password)
-		{
-			
-			$this->errorCode=self::ERROR_PASSWORD_INVALID;
-
-		}
+		
 		else if($user->STATUS != 1){
 
 			$this->errorCode=self::ERROR_USER_INACTIVE;

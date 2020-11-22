@@ -90,5 +90,8 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
+		'jwt_key' => '',
+		'sso_login' => 'http://local.central.com/site/login',
+   		'sso_logout' => 'http://local.central.com/site/sess-logout',
 	),
 );

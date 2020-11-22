@@ -147,11 +147,14 @@ class User extends MyActiveRecord
 		if($this->_identity===null)
 		{
 
-			$this->_identity=new UserIdentity($this->USERNAME,md5($this->PASSWORD));
+			
+			$this->_identity=new UserIdentity($this->USERNAME,md5($this->PASSWORD), $this->uuid);
 			$this->_identity->authenticate();
+
 		}
 
 		$errCode = $this->_identity->errorCode;
+
 
 		if($this->_identity->errorCode===UserIdentity::ERROR_NONE)
 		{
@@ -160,7 +163,6 @@ class User extends MyActiveRecord
 			
 			
 		}
-
 
 		return $errCode;
 	}
