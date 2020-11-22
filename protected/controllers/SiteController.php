@@ -23,6 +23,34 @@ class SiteController extends Controller
 		);
 	}
 
+	public function actionAuthCallback()
+	{
+		header('Content-type:application/json;charset=utf-8');
+		$results = [];
+        
+        try
+        {
+            $token = $_SERVER['HTTP_X_JWT_TOKEN'];
+            $key = Yii::app()->params->jwt_key;
+            $decoded = JWT::decode($token, base64_decode(strtr($key, '-_', '+/')), ['HS256']);
+            $results = [
+                'code' => 200,
+                'message' => 'Valid'
+            ];   
+        }
+        catch(Exception $e) 
+        {
+
+            $results = [
+                'code' => 500,
+                'message' => $e->getMessage()
+            ];
+        }
+
+        echo json_encode($results);
+        die();
+	}
+
 	public function actionLoginSso($token)
     {
     	
