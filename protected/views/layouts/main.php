@@ -1,4 +1,40 @@
-<?php /* @var $this Controller */ ?>
+<?php /* @var $this Controller */ 
+
+
+
+$list_apps = [
+	array('label'=>'Home', 'url'=>array('/site/index')),
+				
+	array('label'=>'Mahasiswa', 'url'=>array('/peserta/admin')),
+	array('label'=>'Export', 'url'=>array('/peserta/export')),
+	array('label'=>'Periode', 'url'=>array('/periode/admin')),
+	array('label'=>'Setting', 'url'=>array('/setting/index')),
+	array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+	
+];
+
+use \Firebase\JWT\JWT;
+
+if(!Yii::app()->user->isGuest)
+{
+	$session = Yii::app()->session;
+	$token = $session->get('token');
+	$key = Yii::app()->params->jwt_key;
+	$decoded = JWT::decode($token, base64_decode(strtr($key, '-_', '+/')), ['HS256']);	
+
+	foreach($decoded->apps as $d)
+    {
+    	$list_apps[] = [
+    		'label' => $d->app_name,
+    		'url' => $d->app_url.$token
+    	];
+    }
+}
+
+$list_apps[] = array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest);
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,15 +72,7 @@
 		if(!Yii::app()->user->isGuest)
 		{
 		$this->widget('zii.widgets.CMenu',array(
-			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'Mahasiswa', 'url'=>array('/peserta/admin')),
-				array('label'=>'Export', 'url'=>array('/peserta/export')),
-				array('label'=>'Periode', 'url'=>array('/periode/admin')),
-				array('label'=>'Setting', 'url'=>array('/setting/index')),
-				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
-			),
+			'items'=>$list_apps,
 
 		));
 
