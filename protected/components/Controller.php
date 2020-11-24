@@ -55,21 +55,21 @@ class Controller extends CController
 			            $key = Yii::app()->params->jwt_key;
 			            $decoded = JWT::decode($token, base64_decode(strtr($key, '-_', '+/')), ['HS256']);
 
-			            $client = new Client(['base_uri' => Yii::app()->params->invoke_token_uri]);
-						$response = $client->request('GET', Yii::app()->params->invoke_token_uri, [
-							'headers' => [
-								'x-jwt-token' => $token
-							]
-						]);
-						$res = json_decode($response->getBody());
+			            // $client = new Client(['base_uri' => Yii::app()->params->invoke_token_uri]);
+						// $response = $client->request('GET', Yii::app()->params->invoke_token_uri, [
+						// 	'headers' => [
+						// 		'x-jwt-token' => $token
+						// 	]
+						// ]);
+						// $res = json_decode($response->getBody());
 
-						if($res->code != 200)
-						{
-							$session->remove('token');
-                        	throw new Exception;
-						}
-						else
-							return true;
+						// if($res->code != 200)
+						// {
+						// 	$session->remove('token');
+      //                   	throw new Exception;
+						// }
+						// else
+						return true;
 			        }
 			        catch(Exception $e) 
 			        {
