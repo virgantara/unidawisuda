@@ -1,6 +1,8 @@
 <?php
 
 require 'vendor/autoload.php';
+use \Firebase\JWT\JWT;
+use GuzzleHttp\Client;
 
 /**
  * Controller is the customized base controller class.
