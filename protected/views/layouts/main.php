@@ -17,18 +17,18 @@ use \Firebase\JWT\JWT;
 
 if(!Yii::app()->user->isGuest)
 {
-	$session = Yii::app()->session;
-	$token = $session->get('token');
-	$key = Yii::app()->params->jwt_key;
-	$decoded = JWT::decode($token, base64_decode(strtr($key, '-_', '+/')), ['HS256']);	
+	// $session = Yii::app()->session;
+	// $token = $session->get('token');
+	// $key = Yii::app()->params->jwt_key;
+	// $decoded = JWT::decode($token, base64_decode(strtr($key, '-_', '+/')), ['HS256']);	
 
-	foreach($decoded->apps as $d)
-    {
-    	$list_apps[] = [
-    		'label' => $d->app_name,
-    		'url' => $d->app_url.$token
-    	];
-    }
+	// foreach($decoded->apps as $d)
+ //    {
+ //    	$list_apps[] = [
+ //    		'label' => $d->app_name,
+ //    		'url' => $d->app_url.$token
+ //    	];
+ //    }
 }
 
 $list_apps[] = array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest);
