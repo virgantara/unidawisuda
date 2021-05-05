@@ -76,6 +76,7 @@ class PeriodeController extends Controller
 				$m->status_aktivasi = 'N';
 				$m->save(false,array('status_aktivasi'));
 			}
+			$model->status_aktivasi = $_POST['Periode']['status_aktivasi'];
 			if($model->save())
 				$this->redirect(array('admin'));
 		}
@@ -106,6 +107,7 @@ class PeriodeController extends Controller
 				$m->save(false,array('status_aktivasi'));
 			}
 			$model->attributes=$_POST['Periode'];
+			$model->status_aktivasi = $_POST['Periode']['status_aktivasi'];
 			if($model->save())
 				$this->redirect(array('admin'));
 		}
