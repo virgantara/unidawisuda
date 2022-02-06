@@ -54,7 +54,7 @@ class Peserta extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			// array('nim, nama_lengkap, fakultas, prodi, tempat_lahir, tanggal_lahir, jenis_kelamin, status_warga, warga_negara, alamat, no_telp, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu, pas_photo, ijazah, akta_kelahiran, resume_skripsi, abstrak, kampus, kmi, bukti_revisi_bahasa, bukti_perpus,bukti_layouter', 'required'),
-			array('nim, nama_lengkap, fakultas, prodi, tempat_lahir, tanggal_lahir, jenis_kelamin, status_warga, warga_negara, alamat, no_telp, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu,  kampus, kmi,drive_path, kode_pendaftaran', 'required'),
+			array('nim, nama_lengkap, fakultas, prodi, tempat_lahir, tanggal_lahir, jenis_kelamin, status_warga, warga_negara, alamat, no_telp, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu,  kampus, kmi,drive_path, kode_pendaftaran, ktp, email', 'required'),
 			array('nim', 'length', 'max'=>50),
 			// array('nim', 'numerical', 'integerOnly'=>true),
 			array('nim','unique'),
