@@ -140,17 +140,37 @@ $kode_unik = Yii::app()->helper->generateUniqueCode(6);
 	</div>
 	<table>
 		<tr>
-			<td>	<?php echo $form->labelEx($model,'nim'); ?>
-		<p>
-		<?php echo $form->textField($model,'nim'); ?><br>
-		<small>Ketik NIM Anda. Jika sudah, tekan Ctrl + Enter</small>
-	</p>
-		<?php echo $form->error($model,'nim'); ?></td>
-			<td><p><?php echo $form->labelEx($model,'nama_lengkap'); ?>
-		<?php echo $form->textField($model,'nama_lengkap',['readonly'=>'readonly']); ?><br>  &nbsp;
-		<?php echo $form->error($model,'nama_lengkap'); ?>
-</p>
-	</td>
+			<td>
+				<?php echo $form->labelEx($model,'nim'); ?>
+				<p>
+					<?php echo $form->textField($model,'nim'); ?><br>
+					<small>Ketik NIM Anda. Jika sudah, tekan Ctrl + Enter</small>
+				</p>
+				<?php echo $form->error($model,'nim'); ?>
+			</td>
+			<td>
+				<p>
+				<?php echo $form->labelEx($model,'ktp'); ?>
+				<?php echo $form->textField($model,'ktp',['readonly'=>'readonly']); ?><br>  &nbsp;
+				<?php echo $form->error($model,'ktp'); ?>
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					<?php echo $form->labelEx($model,'nama_lengkap'); ?>
+					<?php echo $form->textField($model,'nama_lengkap',['readonly'=>'readonly']); ?><br>  &nbsp;
+					<?php echo $form->error($model,'nama_lengkap'); ?>
+				</p>
+			</td>
+			<td>
+				<p>
+					<?php echo $form->labelEx($model,'email'); ?>
+					<?php echo $form->textField($model,'email',['readonly'=>'readonly']); ?><br>  &nbsp;
+					<?php echo $form->error($model,'email'); ?>
+				</p>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="2">	<?php echo $form->labelEx($model,'kampus'); ?>
@@ -350,6 +370,8 @@ $(document).on('keydown','#Peserta_nim',function(e){
 				else
 				{
 					$('#Peserta_nama_lengkap').val(hasil.mhs.nama_mahasiswa);
+					$('#Peserta_ktp').val(hasil.mhs.ktp);
+					$('#Peserta_email').val(hasil.mhs.email);
 					$('#Peserta_kampus').val(hasil.mhs.nama_kampus);
 					$('#Peserta_fakultas').val(hasil.mhs.nama_fakultas);
 					$('#Peserta_prodi').val(hasil.mhs.nama_prodi);
